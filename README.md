@@ -12,10 +12,10 @@
   VSCode不说了，最强IDE(雾。
 </p>
 <p>
-  SDCC支持多种8位机的编译。<a href="http://sdcc.sourceforge.net/">SDCC官网</a>
+  SDCC支持多种8位机的编译。<a href="http://sdcc.sourceforge.net/" target="_blank">SDCC官网</a>
 </p>
 <p>
-  stm8flash在GitHub可以下载，但是在Windows环境下使用MinGW64对烧录器进行编译的时候需要修改stm8flash的源代码才能进行编译，我后面会放出修改后的程序，Linux环境下直接make就行了。你也可以自行下载源代码，然后进行更改。<a href="https://github.com/vdudouyt/stm8flash">stm8flash下载地址</a>
+  stm8flash在GitHub可以下载，但是在Windows环境下使用MinGW64对烧录器进行编译的时候需要修改stm8flash的源代码才能进行编译，我后面会放出修改后的程序，Linux环境下直接make就行了。你也可以自行下载源代码，然后进行更改。<a href="https://github.com/vdudouyt/stm8flash" target="_blank">stm8flash下载地址</a>
 </p>
 <p>
   debug软件还没找到，openocd不支持stm8，这个后面再说吧。
