@@ -21,3 +21,7 @@ debug软件还没找到，openocd不支持stm8，这个后面再说吧。
 │  ├─chip（主要是存放芯片的寄存器地址，可以挑选需要的进行下载）   
 │  └─user（用户的程序存放在这里）  
 └─tools（程序以外的工具包，例如stm8flash的Windows版本就会存放在这里）  
+## 更新进度
+|时间|更新内容|
+|-|-|
+|2020/7/23|更新了tools的适用于Windows的stm8flash，里面包含一个编译好的可执行文件，你也可以自行下载主分支的程序和我这个程序进行对比，详见tools\stm8flash-master内的README-FIX.txt文件|
