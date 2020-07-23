@@ -24,4 +24,4 @@ debug软件还没找到，openocd不支持stm8，这个后面再说吧。
 ## 更新进度
 |时间|更新内容|
 |-|-|
-|2020/7/23|更新了tools的适用于Windows的stm8flash，里面包含一个编译好的可执行文件，你也可以自行下载主分支的程序和我这个程序进行对比，详见tools\stm8flash-master内的README-FIX.txt文件|
+|2020/7/23|tools文件夹中新增了适用于Windows的stm8flash，里面包含一个编译好的可执行文件，你也可以自行下载主分支的程序和我这个程序进行对比，详见tools\stm8flash-master内的README-FIX.txt文件。|
