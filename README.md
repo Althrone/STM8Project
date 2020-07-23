@@ -20,8 +20,19 @@
 <p>
   debug软件还没找到，openocd不支持stm8，这个后面再说吧。
 </p>
-<hr>
 <h2>文件树</h2>
 <p>
-aaaa
+├── README.md
 </p>
+├── package.json
+</p>
+└── src
+</p>
+    ├── common
+    </p>
+    │   └── XInput.vue
+    ├── index.js
+    └── utils
+        ├── auto-require.js
+        ├── index.js
+        └── types.js
