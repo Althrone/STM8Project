@@ -11,6 +11,7 @@
 #define PA_CR1 *(volatile unsigned char *)0x5003
 #define PA_CR2 *(volatile unsigned char *)0x5004
 
+
 #define PB_ODR *(volatile unsigned char *)0x5005
 #define PB_IDR *(volatile unsigned char *)0x5006
 #define PB_DDR *(volatile unsigned char *)0x5007
