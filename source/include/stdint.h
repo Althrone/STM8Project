@@ -1,8 +1,10 @@
-/**
+/****************************************
  * 此文件节选自c99中引进的一个标准C库的文件
- * 
- * /
+ ****************************************/
 /* 7.18.1.1  Exact-width integer types */
+#ifndef _STDINT_H_
+#define _STDINT_H_
+
 typedef signed char			int8_t;
 typedef unsigned char		uint8_t;
 
@@ -14,6 +16,11 @@ typedef unsigned int		uint32_t;
 
 typedef signed long long	int64_t;
 typedef unsigned long long	uint64_t;
+
+#endif /*_STDINT_H_*/
+
+
+
 
 //_t代表types，最基础的种类
 

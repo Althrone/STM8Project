@@ -2,5 +2,5 @@
 
 void main()
 {
-    uint16_t a;
+	uint16_t a;
 }
