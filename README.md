@@ -29,7 +29,6 @@ debug软件还没找到，openocd不支持stm8，这个后面再说吧。
 │  └─user（用户的程序存放在这里）  
 └─tools（程序以外的工具包，选择性下载）  
     └─stm8flash-master（stm8flash的Windows版本）  
-┌└┐┘─│├┤┬┴┼
 
 ## 更新进度
 |时间|更新内容|
