@@ -30,6 +30,39 @@
 #define UARTX_BRR2_MSB_MASK     (0xF<<UARTX_BRR2_MSB_SHIFT)
     #define UARTX_BRR2_MSB_(n)  ((n)<<UARTX_BRR2_MSB_SHIFT)
 
+#define UART_CR1_PIEN           (1<<0)
+#define UART_CR1_PS             (1<<1)
+#define UART_CR1_PCEN           (1<<2)
+#define UART_CR1_WAKE           (1<<3)
+#define UART_CR1_M              (1<<4)
+#define UART_CR1_UARTD          (1<<5)
+#define UART_CR1_T8             (1<<6)
+#define UART_CR1_R8             (1<<7)
+
+#define UART_CR2_SBK            (1<<0)
+#define UART_CR2_RWU            (1<<1)
+#define UART_CR2_REN            (1<<2)
+#define UART_CR2_TEN            (1<<3)
+#define UART_CR2_ILIEN          (1<<4)
+#define UART_CR2_RIEN           (1<<5)
+#define UART_CR2_TCIEN          (1<<6)
+#define UART_CR2_TIEN           (1<<7)
+
+#define UART_CR3_LBCL           (1<<0)
+#define UART_CR3_CPHA           (1<<1)
+#define UART_CR3_CPOL           (1<<2)
+#define UART_CR3_CLKEN          (1<<3)
+#define UART_CR3_STOP_SHIFT     (4)
+#define UART_CR3_STOP_MASK      (0x3<<UART_CR3_STOP_SHIFT)
+    #define UART_CR3_STOP_1     (0x0<<UART_CR3_STOP_SHIFT)
+  //#define UART_CR3_STOP_Res   (0x1<<UART_CR3_STOP_SHIFT)
+    #define UART_CR3_STOP_2     (0x2<<UART_CR3_STOP_SHIFT)
+    #define UART_CR3_STOP_1P5   (0x3<<UART_CR3_STOP_SHIFT)
+#define UART_CR3_STOP1          (1<<4)
+#define UART_CR3_STOP2          (1<<5)
+#define UART_CR3_LINEN          (1<<6)
+//#define UART_CR3_Res          (1<<7)
+
 //寄存器基地址+偏移地址
 
 
