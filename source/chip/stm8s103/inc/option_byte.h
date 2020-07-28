@@ -77,14 +77,14 @@
 #define OPT_ROP     *(volatile uint8_t *)(OPT_BSAE+OPT_ROP_OFFSET)
 #define OPT_UBC     *(volatile uint8_t *)(OPT_BSAE+OPT_UBC_OFFSET)
 #define OPT_NUBC    *(volatile uint8_t *)(OPT_BSAE+OPT_NUBC_OFFSET)
-#define OPT_ROP *(volatile uint8_t *)(OPT_BSAE+OPT_AFR_OFFSET)
-#define OPT_ROP *(volatile uint8_t *)(OPT_BSAE+OPT_NAFR_OFFSET)
-#define OPT_ROP *(volatile uint8_t *)(OPT_BSAE+OPT_MISC_OFFSET)
-#define OPT_ROP *(volatile uint8_t *)(OPT_BSAE+OPT_NMISC_OFFSET)
-#define OPT_ROP *(volatile uint8_t *)(OPT_BSAE+OPT_CLK_OFFSET)
-#define OPT_ROP *(volatile uint8_t *)(OPT_BSAE+OPT_NCLK_OFFSET)
-#define OPT_ROP *(volatile uint8_t *)(OPT_BSAE+OPT_HSE_OFFSET)
-#define OPT_ROP *(volatile uint8_t *)(OPT_BSAE+OPT_NHSE_OFFSET)
+#define OPT_AFR     *(volatile uint8_t *)(OPT_BSAE+OPT_AFR_OFFSET)
+#define OPT_NAFR    *(volatile uint8_t *)(OPT_BSAE+OPT_NAFR_OFFSET)
+#define OPT_MISC    *(volatile uint8_t *)(OPT_BSAE+OPT_MISC_OFFSET)
+#define OPT_NMISC   *(volatile uint8_t *)(OPT_BSAE+OPT_NMISC_OFFSET)
+#define OPT_CLK     *(volatile uint8_t *)(OPT_BSAE+OPT_CLK_OFFSET)
+#define OPT_NCLK    *(volatile uint8_t *)(OPT_BSAE+OPT_NCLK_OFFSET)
+#define OPT_HSE     *(volatile uint8_t *)(OPT_BSAE+OPT_HSE_OFFSET)
+#define OPT_NHSE    *(volatile uint8_t *)(OPT_BSAE+OPT_NHSE_OFFSET)
 
 #endif /*_OPTION_BYTE_H_*/
 
