@@ -3,14 +3,6 @@
 
 #include "./memory_map.h"
 
-/**
- * ┌ └ ┐ ┘ ─ │ ├ ┤ ┬ ┴ ┼
- * ┌
- * │
- * ├
- * 
- */
-
 //寄存器偏移地址
 
 #define UARTX_SR_OFFSET         0x0000
@@ -23,7 +15,6 @@
 #define UARTX_CR4_OFFSET        0x0007
 #define UARTX_CR5_OFFSET        0x0008
 #define UARTX_CR6_OFFSET        0x0009
-
 
 //寄存器操作
 
@@ -117,7 +108,6 @@
     #define UARTX_PSCR_PSC_(n)  ((n)<<UARTX_PSCR_PSC_SHIFT)
 
 //寄存器基地址+偏移地址
-
 
 #endif /*_UARTX_H_*/
 

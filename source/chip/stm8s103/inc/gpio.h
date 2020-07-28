@@ -56,7 +56,6 @@
 #define PX_CR2_C26      (1<<6)
 #define PX_CR2_C27      (1<<7)
 
-
 //寄存器基地址+偏移地址
 #define PA_ODR *(volatile uint8_t *)(PA_BASE+PX_ODR_OFFSET)
 #define PA_IDR *(volatile uint8_t *)(PA_BASE+PX_IDR_OFFSET)
