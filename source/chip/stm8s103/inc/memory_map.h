@@ -8,12 +8,12 @@
 
 #include "../../../include/config.h"
 
-#define PA_BASE			0x005000/* 0x005000-0x005004: Port A                    */
-#define PB_BASE			0x005005/* 0x005005-0x005009: Port B                    */
-#define PC_BASE			0x00500A/* 0x00500A-0x00500E: Port C                    */
-#define PD_BASE			0x00500F/* 0x00500F-0x005013: Port D                    */
-#define PE_BASE			0x005014/* 0x005014-0x005018: Port E                    */
-#define PF_BASE			0x005019/* 0x005019-0x00501D: Port F                    */
+#define PA_BASE         0x005000/* 0x005000-0x005004: Port A                    */
+#define PB_BASE         0x005005/* 0x005005-0x005009: Port B                    */
+#define PC_BASE         0x00500A/* 0x00500A-0x00500E: Port C                    */
+#define PD_BASE         0x00500F/* 0x00500F-0x005013: Port D                    */
+#define PE_BASE         0x005014/* 0x005014-0x005018: Port E                    */
+#define PF_BASE         0x005019/* 0x005019-0x00501D: Port F                    */
                                 /* 0x00501E-0x005059: Reserved area (60 byte)   */
 #define FLASH_BASE      0x00505A/* 0x00505A-0x005064: Flash                     */
                                 /* 0x005065-0x00509F: Reserved area (59 byte)   */
@@ -31,9 +31,12 @@
 #define BEEP_BASE       0x0050F3/* 0x0050F3-0x0050F3: BEEP                      */
                                 /* 0x0050F4-0x0050FF: Reserved area (12 byte)   */
                                 /* 0x005100-0x0051FF: Reserved area (265 byte)  */
-#define SPI_BASE        0x005200/* 0x005200-0x0050F3: SPI                       */
-
-
+#define SPI_BASE        0x005200/* 0x005200-0x005207: SPI                       */
+                                /* 0x005208-0x00520F: Reserved area (8 byte)    */
+#define I2C_BASE        0x005210/* 0x005210-0x00521E: I2C                       */
+                                /* 0x00521F-0x00522F: Reserved area (17 byte)   */
+#define UART1_BASE      0x005230/* 0x005230-0x00523A: UART1                     */
+                                /* 0x00523B-0x00523F: Reserved area (21 byte)   */
 
 
 
