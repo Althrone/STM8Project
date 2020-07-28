@@ -7,7 +7,24 @@
 #define _MEMORY_MAPE_H_
 
 #include "../../../include/config.h"
-
+/*RAM****************************************************************************/
+                                /* 0x000000-0x0003FF: RAM (1 Kbyte)             */
+                                /* 0x0001FF-0x0003FF: stack (513 byte)          */
+/*Reserved***********************************************************************/
+                                /* 0x000800-0x003FFF: Reserved area (120 Kbyte) */
+/*640 bytes data EEPROM**********************************************************/
+                                /* 0x004000-0x00427F: data EEPROM (640 byte)    */
+/*Reserved***********************************************************************/
+                                /* 0x004280-0x0047FF: Reserved area (1408 byte) */
+/*Option bytes*******************************************************************/
+                                /* 0x004800-0x00480A: Option bytes (11 byte)    */
+/*Reserved***********************************************************************/
+                                /* 0x00480B-0x004864: Reserved area (90 byte)   */
+/*Unique ID**********************************************************************/
+                                /* 0x004865-0x004870: Unique ID (11 byte)       */
+/*Reserved***********************************************************************/
+                                /* 0x004871-0x004FFF: Reserved area (1935 byte) */
+/*GPIO and periph. reg.**********************************************************/
 #define PA_BASE         0x005000/* 0x005000-0x005004: Port A                    */
 #define PB_BASE         0x005005/* 0x005005-0x005009: Port B                    */
 #define PC_BASE         0x00500A/* 0x00500A-0x00500E: Port C                    */
@@ -36,22 +53,32 @@
 #define I2C_BASE        0x005210/* 0x005210-0x00521E: I2C                       */
                                 /* 0x00521F-0x00522F: Reserved area (17 byte)   */
 #define UART1_BASE      0x005230/* 0x005230-0x00523A: UART1                     */
-                                /* 0x00523B-0x00523F: Reserved area (21 byte)   */
-
-
-
+                                /* 0x00523B-0x00524F: Reserved area (21 byte)   */
+#define TIM1_BASE       0x005250/* 0x005250-0x00526F: TIM1                      */
+                                /* 0x005270-0x0052FF: Reserved area (144 byte)  */
+#define TIM2_BASE       0x005300/* 0x005300-0x005316: TIM2                      */
+                                /* 0x005317-0x00533F: Reserved area (43 byte)   */
+#define TIM4_BASE       0x005340/* 0x005340-0x005348: TIM4                      */
+                                /* 0x005349-0x0053DF: Reserved area (153 byte)  */
+#define ADC1_BASE       0x0053E0/* 0x0053E0-0x00540F: ADC1                      */
                                 /* 0x005410-0x0057FF: Reserved area (1008 byte) */
-
-
-#define CPU_BASE        0X007F60/* 0X007F60-0X007F60: CPU                       */
-                                /* 0x007F61-0x007F6F: Reserved area (2 byte)    */
+/*Reserved***********************************************************************/
+                                /* 0x005800-0x007EFF: Reserved area (9984 byte) */
+/*CPU/SWIM/debug/ITC registers***************************************************/
+#define CPU_BASE        0X007F00/* 0X007F00-0X007F60: CPU                       */
+                                /* 0x007F61-0x007F6F: Reserved area (15 byte)   */
 #define ITC_BASE        0x007F70/* 0x007F70-0x007F77: ITC                       */
                                 /* 0x007F78-0x007F79: Reserved area (2 byte)    */
 #define SWIM_BASE       0x007F80/* 0x007F80-0x007F80: SWIM                      */
                                 /* 0x007F81-0x007F8F: Reserved area (15 byte)   */
 #define DM_BASE         0x007F90/* 0x007F90-0x007F9A: DM                        */
-
+                                /* 0x007F9B-0x007F9F: Reserved area (5 byte)    */
+                                /* 0x007FA0-0x007FFF: Reserved area (104 byte)  */
+/*Flash program memory***********************************************************/
+                                /* 0x008000-0x00807F: 32 interrupt vectors      */
+                                /* 0x008000-0x009FFF: ROM (8 Kbyte)             */
+/*Reserved***********************************************************************/
+                                /* 0x00A000-0x027FFF: Reserved area (120 Kbyte) */
+/********************************************************************************/
 
 #endif /*_MEMORY_MAPE_H_*/
-
-/**/
