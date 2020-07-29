@@ -17,17 +17,17 @@
 #define OPT_NHSE_OFFSET         0x000A
 
 //寄存器操作
-#define OPT_ROP_ROP_SHIFT       (0)
-#define OPT_ROP_ROP_MASK        (0xFF<<OPT_ROP_ROP_SHIFT)
-    #define OPT_ROP_ROP_EN      (0xAA<<OPT_ROP_ROP_SHIFT)
+#define OPT_ROP_ROP_SHIFT           (0)
+#define OPT_ROP_ROP_MASK            (0xFF<<OPT_ROP_ROP_SHIFT)
+    #define OPT_ROP_ROP_EN          (0xAA<<OPT_ROP_ROP_SHIFT)
 
-#define OPT_UBC_UBC_SHIFT       (0)
-#define OPT_UBC_UBC_MASK        (0xFF<<OPT_UBC_UBC_SHIFT)
-    #define OPT_UBC_UBC_(n)     ((n)<<OPT_UBC_UBC_SHIFT)//输入0~127，0=no UBC，127=Pages 0 to 126 defined as UBC
+#define OPT_UBC_UBC_SHIFT           (0)
+#define OPT_UBC_UBC_MASK            (0xFF<<OPT_UBC_UBC_SHIFT)
+    #define OPT_UBC_UBC_(n)         ((n)<<OPT_UBC_UBC_SHIFT)//输入0~127，0=no UBC，127=Pages 0 to 126 defined as UBC
 
-#define OPT_NUBC_NUBC_SHIFT     (0)
-#define OPT_NUBC_NUBC_MASK      (0xFF<<OPT_NUBC_NUBC_SHIFT)
-    #define OPT_NUBC_NUBC_(n)  ~((n)<<OPT_NUBC_NUBC_SHIFT)//输入与OPT_UBC_UBC_(n)一样的值
+#define OPT_NUBC_NUBC_SHIFT         (0)
+#define OPT_NUBC_NUBC_MASK          (0xFF<<OPT_NUBC_NUBC_SHIFT)
+    #define OPT_NUBC_NUBC_(n)      ~((n)<<OPT_NUBC_NUBC_SHIFT)//输入与OPT_UBC_UBC_(n)一样的值
 
 #if defined(__STM8S103F2_)||defined(__STM8S103F3_)
 
