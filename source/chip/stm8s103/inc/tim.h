@@ -5,8 +5,42 @@
 
 //寄存器偏移地址
 
-
 //寄存器操作
+#define TIMX_CR1_CEN            (1<<0)
+#define TIMX_CR1_UDIS           (1<<1)
+#define TIMX_CR1_URS            (1<<2)
+#define TIMX_CR1_OPM            (1<<3)
+#define TIMX_CR1_DIR            (1<<4)
+#define TIMX_CR1_CMSH           (1<<6)
+#define TIMX_CR1_CMSL           (1<<5)
+#define TIMX_CR1_CMS_SHIFT      (5)
+#define TIMX_CR1_CMS_MASK       (0x03<<TIMX_CR1_CMS_SHIFT)
+    #define TIMX_CR1_CMS_EDGE   (0x00<<TIMX_CR1_CMS_SHIFT)
+    #define TIMX_CR1_CMS_CEN1   (0x01<<TIMX_CR1_CMS_SHIFT)
+    #define TIMX_CR1_CMS_CEN2   (0x02<<TIMX_CR1_CMS_SHIFT)
+    #define TIMX_CR1_CMS_CEN3   (0x03<<TIMX_CR1_CMS_SHIFT)
+#define TIMX_CR1_APRE           (1<<7)
+
+#define TIMX_IER_UIE            (1<<0)
+#define TIMX_IER_TIE            (1<<6)
+
+#define TIMX_SR_UIF             (1<<0)
+#define TIMX_SR_TIF             (1<<6)
+
+#define TIMX_EGR_UG             (1<<0)
+#define TIMX_EGR_TG             (1<<6)
+
+#define TIMX_CNTR_CNT_SHIFT     (0)
+#define TIMX_CNTR_CNT_MASK      (0xFF<<TIMX_CNTR_CNT_SHIFT)
+    #define TIMX_CNTR_CNT_(n)   ((n)<<TIMX_CNTR_CNT_SHIFT)
+
+#define TIMX_PSCR_PSC_SHIFT     (0)
+#define TIMX_PSCR_PSC_MASK      (0x07<<TIMX_PSCR_PSC_SHIFT)
+    #define TIMX_PSCR_PSC_(n)   ((n/2)<<TIMX_PSCR_PSC_SHIFT)//输入2、4、6...14的整数
+
+#define TIMX_ARR_ARR_SHIFT      (0)
+#define TIMX_ARR_ARR_MASK       (0xFF<<TIMX_ARR_ARR_SHIFT)
+    #define TIMX_ARR_ARR_(n)    ((n)<<TIMX_ARR_ARR_SHIFT)
 
 //寄存器基地址+偏移地址
 #define TIM1_CR1    *(volatile uint8_t *)0x5250

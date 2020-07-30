@@ -2,7 +2,7 @@
 
 void main()
 {
-    
+    TIM4_PSCR|=TIMX_PSCR_PSC_(14);
 }
 
 
