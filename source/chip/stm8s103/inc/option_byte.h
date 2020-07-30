@@ -132,7 +132,6 @@
     #define OPT_NHSE_NHSECNT_0P5   ~(0xE1<<OPT_NHSE_NHSECNT_SHIFT)
 
 //寄存器基地址+偏移地址
-
 #define OPT_ROP     *(volatile uint8_t *)(OPT_BSAE+OPT_ROP_OFFSET)
 #define OPT_UBC     *(volatile uint8_t *)(OPT_BSAE+OPT_UBC_OFFSET)
 #define OPT_NUBC    *(volatile uint8_t *)(OPT_BSAE+OPT_NUBC_OFFSET)

@@ -1,0 +1,14 @@
+{
+    "C_Cpp.errorSquiggles": "Enabled",
+    "files.associations": {
+        "*.flash": "kconfig",
+        "Kconfig": "kconfig",
+        "*.tim": "kconfig",
+        "*.clock": "kconfig",
+        "*.iic": "kconfig",
+        "*.pin": "kconfig",
+        "*.fpu": "kconfig",
+        "*.h": "c",
+        "CHUAN.C": "cpp"
+    }
+}

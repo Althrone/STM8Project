@@ -4,7 +4,6 @@
 #include "./memory_map.h"
 
 //寄存器偏移地址
-
 #define UARTX_SR_OFFSET         0x0000
 #define UARTX_DR_OFFSET         0x0001
 #define UARTX_BRR1_OFFSET       0x0002
@@ -14,10 +13,10 @@
 #define UARTX_CR3_OFFSET        0x0006
 #define UARTX_CR4_OFFSET        0x0007
 #define UARTX_CR5_OFFSET        0x0008
-#define UARTX_CR6_OFFSET        0x0009
+#define UARTX_GTR_OFFSET        0x0009
+#define UARTX_PSCR_OFFSET       0x000A
 
 //寄存器操作
-
 #define UARTX_SR_PE             (1<<0)
 #define UARTX_SR_FE             (1<<1)
 #define UARTX_SR_NF             (1<<2)
@@ -90,15 +89,6 @@
 //#define UARTX_CR5_Res         (1<<6)
 //#define UARTX_CR5_Res         (1<<7)
 
-#define UARTX_CR_LSF            (1<<0)
-#define UARTX_CR_LHDF           (1<<1)
-#define UARTX_CR_LHDIEN         (1<<2)
-//#define UARTX_CR_Res          (1<<3)
-#define UARTX_CR_LASE           (1<<4)
-#define UARTX_CR_LSLV           (1<<5)
-//#define UARTX_CR_Res          (1<<6)
-#define UARTX_CR_LDUM           (1<<7)
-
 #define UARTX_GTR_GT_SHIFT      (0)
 #define UARTX_GTR_GT_MASK       (0xFF<<UARTX_GTR_GT_SHIFT)
     #define UARTX_GTR_GT_(n)    ((n)<<UARTX_GTR_GT_SHIFT)
@@ -108,9 +98,32 @@
     #define UARTX_PSCR_PSC_(n)  ((n)<<UARTX_PSCR_PSC_SHIFT)
 
 //寄存器基地址+偏移地址
+#define UART1_SR    *(volatile uint8_t *)(UART1_BASE+UARTX_SR_OFFSET)
+#define UART1_DR    *(volatile uint8_t *)(UART1_BASE+UARTX_DR_OFFSET)
+#define UART1_BRR1  *(volatile uint8_t *)(UART1_BASE+UARTX_BRR1_OFFSET)
+#define UART1_BRR2  *(volatile uint8_t *)(UART1_BASE+UARTX_BRR2_OFFSET)
+#define UART1_CR1   *(volatile uint8_t *)(UART1_BASE+UARTX_CR1_OFFSET)
+#define UART1_CR2   *(volatile uint8_t *)(UART1_BASE+UARTX_CR2_OFFSET)
+#define UART1_CR3   *(volatile uint8_t *)(UART1_BASE+UARTX_CR3_OFFSET)
+#define UART1_CR4   *(volatile uint8_t *)(UART1_BASE+UARTX_CR4_OFFSET)
+#define UART1_CR5   *(volatile uint8_t *)(UART1_BASE+UARTX_CR5_OFFSET)
+#define UART1_GTR   *(volatile uint8_t *)(UART1_BASE+UARTX_GTR_OFFSET)
+#define UART1_PSCR  *(volatile uint8_t *)(UART1_BASE+UARTX_PSCR_OFFSET)
 
 #endif /*_UARTX_H_*/
 
 /*用于批量修改
 #define UARTX_(1<<)
+
+#define UART_SR    *(volatile uint8_t *)(UART_BASE+UARTX_SR_OFFSET)
+#define UART_DR    *(volatile uint8_t *)(UART_BASE+UARTX_DR_OFFSET)
+#define UART_BRR1  *(volatile uint8_t *)(UART_BASE+UARTX_BRR1_OFFSET)
+#define UART_BRR2  *(volatile uint8_t *)(UART_BASE+UARTX_BRR2_OFFSET)
+#define UART_CR1   *(volatile uint8_t *)(UART_BASE+UARTX_CR1_OFFSET)
+#define UART_CR2   *(volatile uint8_t *)(UART_BASE+UARTX_CR2_OFFSET)
+#define UART_CR3   *(volatile uint8_t *)(UART_BASE+UARTX_CR3_OFFSET)
+#define UART_CR4   *(volatile uint8_t *)(UART_BASE+UARTX_CR4_OFFSET)
+#define UART_CR5   *(volatile uint8_t *)(UART_BASE+UARTX_CR5_OFFSET)
+#define UART_GTR   *(volatile uint8_t *)(UART_BASE+UARTX_GTR_OFFSET)
+#define UART_PSCR  *(volatile uint8_t *)(UART_BASE+UARTX_PSCR_OFFSET)
 */
