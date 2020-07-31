@@ -6,6 +6,7 @@
 #include "./inc/rst.h"
 #include "./inc/clk.h"
 #include "./inc/gpio.h"
+#include "./inc/beep.h"
 #include "./inc/tim.h"
 #include "./inc/uart.h"
 

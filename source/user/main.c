@@ -19,7 +19,7 @@ void main()
     pb5_init();
     while(1)
     {
-        
+        PA_CR1|=BEEP_CSR_BEEPDIV_(32);
     }
 }
 
