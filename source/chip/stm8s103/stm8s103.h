@@ -6,5 +6,6 @@
 #include "./inc/gpio.h"
 #include "./inc/tim.h"
 #include "./inc/uart.h"
+#include "./inc/clk.h"
 
 #endif /*_STM8S103_H_*/

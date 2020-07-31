@@ -20,6 +20,33 @@
 #define CLK_SWIMCCR_OFFSET  0x000D
 
 //寄存器操作
+#define CLK_ICKR_HSIEN                  (1<<0)
+#define CLK_ICKR_HSIRDY                 (1<<1)
+#define CLK_ICKR_FHW                    (1<<2)
+#define CLK_ICKR_LSIEN                  (1<<3)
+#define CLK_ICKR_LSIRDY                 (1<<4)
+#define CLK_ICKR_REGAH                  (1<<5)
+
+#define CLK_ECKR_HSEEN                  (1<<0)
+#define CLK_ECKR_HSERDY                 (1<<1)
+
+#define CLK_CMSR_CKM_SHIFT              (0)
+#define CLK_CMSR_CKM_MASK               (0xFF<<CLK_CMSR_CKM_SHIFT)
+    #define CLK_CMSR_CKM_HSI            (0xE1<<CLK_CMSR_CKM_SHIFT)
+    #define CLK_CMSR_CKM_LSI            (0xD2<<CLK_CMSR_CKM_SHIFT)
+    #define CLK_CMSR_CKM_HSE            (0xB4<<CLK_CMSR_CKM_SHIFT)
+
+#define CLK_SWR_SWI_SHIFT               (0)
+#define CLK_SWR_SWI_MASK                (0xFF<<CLK_SWR_SWI_SHIFT)
+    #define CLK_SWR_SWI_HSI             (0xE1<<CLK_SWR_SWI_SHIFT)
+    #define CLK_SWR_SWI_LSI             (0xD2<<CLK_SWR_SWI_SHIFT)
+    #define CLK_SWR_SWI_HSE             (0xB4<<CLK_SWR_SWI_SHIFT)
+
+#define CLK_SWCR_SWBSY                  (1<<0)
+#define CLK_SWCR_SWEN                   (1<<1)
+#define CLK_SWCR_SWIEN                  (1<<2)
+#define CLK_SWCR_SWIF                   (1<<3)
+
 #define CLK_CKDIVR_CPUDIV_SHIFT         (0)
 #define CLK_CKDIVR_CPUDIV_MASK          (0x07<<CLK_CKDIVR_CPUDIV_SHIFT)
     #define CLK_CKDIVR_CPUDIV_DIV1      (0x00<<CLK_CKDIVR_CPUDIV_SHIFT)
@@ -37,6 +64,57 @@
     #define CLK_CKDIVR_HSIDIV_DIV4      (0x02<<CLK_CKDIVR_HSIDIV_SHIFT)
     #define CLK_CKDIVR_HSIDIV_DIV8      (0x03<<CLK_CKDIVR_HSIDIV_SHIFT)
 
+#define CLK_PCKENR1_I2C                 (1<<0)
+#define CLK_PCKENR1_SPI                 (1<<1)
+//#define CLK_PCKENR1_Res               (1<<2)
+#define CLK_PCKENR1_UART1               (1<<3)
+#define CLK_PCKENR1_TIM4                (1<<4)
+#define CLK_PCKENR1_TIM2                (1<<5)
+//#define CLK_PCKENR1_Res               (1<<6)
+#define CLK_PCKENR1_TIM1                (1<<7)
+
+//#define CLK_PCKENR2_Res               (1<<0)
+//#define CLK_PCKENR2_Res               (1<<1)
+#define CLK_PCKENR2_AWU                 (1<<2)
+#define CLK_PCKENR2_ADC                 (1<<3)
+//#define CLK_PCKENR2_Res               (1<<4)
+//#define CLK_PCKENR2_Res               (1<<5)
+//#define CLK_PCKENR2_Res               (1<<6)
+//#define CLK_PCKENR2_Res               (1<<7)
+
+#define CLK_CSSR_CSSEN                  (1<<0)
+#define CLK_CSSR_AUX                    (1<<1)
+#define CLK_CSSR_CSSDIE                 (1<<2)
+#define CLK_CSSR_CSSD                   (1<<3)
+
+#define CLK_CCOR_CCOEN                  (1<<0)
+#define CLK_CCOR_CCOSEL_SHIFT           (1)
+#define CLK_CCOR_CCOSEL_MASK            (0x0F<<CLK_CCOR_CCOSEL_SHIFT)
+    #define CLK_CCOR_CCOSEL_HSIDIV      (0x00<<CLK_CCOR_CCOSEL_SHIFT)
+    #define CLK_CCOR_CCOSEL_LSI         (0x01<<CLK_CCOR_CCOSEL_SHIFT)
+    #define CLK_CCOR_CCOSEL_HSE         (0x02<<CLK_CCOR_CCOSEL_SHIFT)
+  //#define CLK_CCOR_CCOSEL_Res         (0x03<<CLK_CCOR_CCOSEL_SHIFT)
+    #define CLK_CCOR_CCOSEL_CPU         (0x04<<CLK_CCOR_CCOSEL_SHIFT)
+    #define CLK_CCOR_CCOSEL_CPUD2       (0x05<<CLK_CCOR_CCOSEL_SHIFT)
+    #define CLK_CCOR_CCOSEL_CPUD4       (0x06<<CLK_CCOR_CCOSEL_SHIFT)
+    #define CLK_CCOR_CCOSEL_CPUD8       (0x07<<CLK_CCOR_CCOSEL_SHIFT)
+    #define CLK_CCOR_CCOSEL_CPUD16      (0x08<<CLK_CCOR_CCOSEL_SHIFT)
+    #define CLK_CCOR_CCOSEL_CPUD32      (0x09<<CLK_CCOR_CCOSEL_SHIFT)
+    #define CLK_CCOR_CCOSEL_CPUD64      (0x0A<<CLK_CCOR_CCOSEL_SHIFT)
+    #define CLK_CCOR_CCOSEL_HSI         (0x0B<<CLK_CCOR_CCOSEL_SHIFT)
+    #define CLK_CCOR_CCOSEL_MASTER      (0x0C<<CLK_CCOR_CCOSEL_SHIFT)
+  //#define CLK_CCOR_CCOSEL_Res         (0x0D<<CLK_CCOR_CCOSEL_SHIFT)
+  //#define CLK_CCOR_CCOSEL_Res         (0x0E<<CLK_CCOR_CCOSEL_SHIFT)
+  //#define CLK_CCOR_CCOSEL_Res         (0x0F<<CLK_CCOR_CCOSEL_SHIFT)
+#define CLK_CCOR_CCORDY                 (1<<5)
+#define CLK_CCOR_CCOBSY                 (1<<6)
+//#define CLK_CCOR_Res                  (1<<7)
+
+#define CLK_HSITRIMR_HSITRIM_SHIFT      (0)
+#define CLK_HSITRIMR_HSITRIM_MASK       (0x0F<<CLK_HSITRIMR_HSITRIM_SHIFT)
+    #define CLK_HSITRIMR_HSITRIM_(n)    ((n)<<CLK_HSITRIMR_HSITRIM_SHIFT)
+
+#define CLK_SWIMCCR_SWIMCLK             (1<<0)
 
 //寄存器基地址+偏移地址
 #define CLK_ICKR        *(volatile uint8_t *)(CLK_BASE+CLK_ICKR_OFFSET)
