@@ -114,7 +114,7 @@
 #define CLK_HSITRIMR_HSITRIM_MASK       (0x0F<<CLK_HSITRIMR_HSITRIM_SHIFT)
     #define CLK_HSITRIMR_HSITRIM_(n)    ((n)<<CLK_HSITRIMR_HSITRIM_SHIFT)
 
-#define CLK_SWIMCCR_SWIMCLK             (1<<0)
+#define CLK_SWIMCCR_SWIMCLK             (1<<0)//0二分频，1不分频
 
 //寄存器基地址+偏移地址
 #define CLK_ICKR        *(volatile uint8_t *)(CLK_BASE+CLK_ICKR_OFFSET)
