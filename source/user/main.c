@@ -46,9 +46,19 @@ void main()
     }
 }
 
+uint8_t all_tmp=0;
+
 void TIM4_UPD_OVF_IRQHandler(void) __interrupt(23)
 {
-
+    all_tmp++;
+    if(all_tmp==10)
+    {
+        all_tmp=0;
+        if(PB_ODR&PX_ODR_ODR5!=PX_ODR_ODR5)
+            PB_ODR|=PX_ODR_ODR5;
+        else
+            PB_ODR&=~PX_ODR_ODR5;
+    }
 }
 
 // void EXTI_PORTE_IRQHandler(void) __intreeupt(7)
