@@ -36,11 +36,11 @@
 
 #define TIMX_PSCR_PSC_SHIFT     (0)
 #define TIMX_PSCR_PSC_MASK      (0x07<<TIMX_PSCR_PSC_SHIFT)
-    #define TIMX_PSCR_PSC_(n)   ((n/2)<<TIMX_PSCR_PSC_SHIFT)//输入2、4、6...14的整数
+    #define TIMX_PSCR_PSC_(n)   ((n/2)<<TIMX_PSCR_PSC_SHIFT)//输入0、2、4...14的整数
 
 #define TIMX_ARR_ARR_SHIFT      (0)
 #define TIMX_ARR_ARR_MASK       (0xFF<<TIMX_ARR_ARR_SHIFT)
-    #define TIMX_ARR_ARR_(n)    ((n)<<TIMX_ARR_ARR_SHIFT)
+    #define TIMX_ARR_ARR_(n)    ((n-1)<<TIMX_ARR_ARR_SHIFT)
 
 //寄存器基地址+偏移地址
 #define TIM1_CR1    *(volatile uint8_t *)0x5250
