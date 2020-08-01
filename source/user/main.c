@@ -35,6 +35,11 @@ void tim4_init()//16MHz输入
     TIM4_CR1|=TIMX_CR1_CEN;//计时器使能
 }
 
+void delay(unsigned long count) {
+    while (count--)
+        __asm__("nop");//sdcc内嵌入汇编
+}
+
 void main()
 {
     clk_init();
@@ -42,23 +47,27 @@ void main()
     tim4_init();
     while(1)
     {
-
+        // PB_ODR&=~PX_ODR_ODR5;
+        // delay(100000L);
+        // PB_ODR|=PX_ODR_ODR5;
+        // delay(100000L);
     }
 }
 
-uint8_t all_tmp=0;
+uint16_t all_tmp=0;
 
 void TIM4_UPD_OVF_IRQHandler(void) __interrupt(23)
 {
     all_tmp++;
-    if(all_tmp==10)
+    if(all_tmp==1000)
     {
         all_tmp=0;
         if(PB_ODR&PX_ODR_ODR5!=PX_ODR_ODR5)
-            PB_ODR|=PX_ODR_ODR5;
-        else
             PB_ODR&=~PX_ODR_ODR5;
+        else
+            PB_ODR|=PX_ODR_ODR5;
     }
+    TIM4_SR&=~TIMX_SR_UIF;
 }
 
 // void EXTI_PORTE_IRQHandler(void) __intreeupt(7)

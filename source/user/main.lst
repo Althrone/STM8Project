@@ -1,0 +1,277 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 4.0.0 #11528 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module main
+                                      6 	.optsdcc -mstm8
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _TIM4_UPD_OVF_IRQHandler
+                                     12 	.globl _main
+                                     13 	.globl _delay
+                                     14 	.globl _tim4_init
+                                     15 	.globl _pb5_init
+                                     16 	.globl _clk_init
+                                     17 	.globl _all_tmp
+                                     18 ;--------------------------------------------------------
+                                     19 ; ram data
+                                     20 ;--------------------------------------------------------
+                                     21 	.area DATA
+                                     22 ;--------------------------------------------------------
+                                     23 ; ram data
+                                     24 ;--------------------------------------------------------
+                                     25 	.area INITIALIZED
+      000000                         26 _all_tmp::
+      000000                         27 	.ds 2
+                                     28 ;--------------------------------------------------------
+                                     29 ; Stack segment in internal ram 
+                                     30 ;--------------------------------------------------------
+                                     31 	.area	SSEG
+      000000                         32 __start__stack:
+      000000                         33 	.ds	1
+                                     34 
+                                     35 ;--------------------------------------------------------
+                                     36 ; absolute external ram data
+                                     37 ;--------------------------------------------------------
+                                     38 	.area DABS (ABS)
+                                     39 
+                                     40 ; default segment ordering for linker
+                                     41 	.area HOME
+                                     42 	.area GSINIT
+                                     43 	.area GSFINAL
+                                     44 	.area CONST
+                                     45 	.area INITIALIZER
+                                     46 	.area CODE
+                                     47 
+                                     48 ;--------------------------------------------------------
+                                     49 ; interrupt vector 
+                                     50 ;--------------------------------------------------------
+                                     51 	.area HOME
+      000000                         52 __interrupt_vect:
+      000000 82v00u00u00             53 	int s_GSINIT ; reset
+      000004 82 00 00 00             54 	int 0x000000 ; trap
+      000008 82 00 00 00             55 	int 0x000000 ; int0
+      00000C 82 00 00 00             56 	int 0x000000 ; int1
+      000010 82 00 00 00             57 	int 0x000000 ; int2
+      000014 82 00 00 00             58 	int 0x000000 ; int3
+      000018 82 00 00 00             59 	int 0x000000 ; int4
+      00001C 82 00 00 00             60 	int 0x000000 ; int5
+      000020 82 00 00 00             61 	int 0x000000 ; int6
+      000024 82 00 00 00             62 	int 0x000000 ; int7
+      000028 82 00 00 00             63 	int 0x000000 ; int8
+      00002C 82 00 00 00             64 	int 0x000000 ; int9
+      000030 82 00 00 00             65 	int 0x000000 ; int10
+      000034 82 00 00 00             66 	int 0x000000 ; int11
+      000038 82 00 00 00             67 	int 0x000000 ; int12
+      00003C 82 00 00 00             68 	int 0x000000 ; int13
+      000040 82 00 00 00             69 	int 0x000000 ; int14
+      000044 82 00 00 00             70 	int 0x000000 ; int15
+      000048 82 00 00 00             71 	int 0x000000 ; int16
+      00004C 82 00 00 00             72 	int 0x000000 ; int17
+      000050 82 00 00 00             73 	int 0x000000 ; int18
+      000054 82 00 00 00             74 	int 0x000000 ; int19
+      000058 82 00 00 00             75 	int 0x000000 ; int20
+      00005C 82 00 00 00             76 	int 0x000000 ; int21
+      000060 82 00 00 00             77 	int 0x000000 ; int22
+      000064 82v00u00u8B             78 	int _TIM4_UPD_OVF_IRQHandler ; int23
+                                     79 ;--------------------------------------------------------
+                                     80 ; global & static initialisations
+                                     81 ;--------------------------------------------------------
+                                     82 	.area HOME
+                                     83 	.area GSINIT
+                                     84 	.area GSFINAL
+                                     85 	.area GSINIT
+      000000                         86 __sdcc_gs_init_startup:
+      000000                         87 __sdcc_init_data:
+                                     88 ; stm8_genXINIT() start
+      000000 AEr00r00         [ 2]   89 	ldw x, #l_DATA
+      000003 27 07            [ 1]   90 	jreq	00002$
+      000005                         91 00001$:
+      000005 72 4FuFFuFF      [ 1]   92 	clr (s_DATA - 1, x)
+      000009 5A               [ 2]   93 	decw x
+      00000A 26 F9            [ 1]   94 	jrne	00001$
+      00000C                         95 00002$:
+      00000C AEr00r00         [ 2]   96 	ldw	x, #l_INITIALIZER
+      00000F 27 09            [ 1]   97 	jreq	00004$
+      000011                         98 00003$:
+      000011 D6uFFuFF         [ 1]   99 	ld	a, (s_INITIALIZER - 1, x)
+      000014 D7uFFuFF         [ 1]  100 	ld	(s_INITIALIZED - 1, x), a
+      000017 5A               [ 2]  101 	decw	x
+      000018 26 F7            [ 1]  102 	jrne	00003$
+      00001A                        103 00004$:
+                                    104 ; stm8_genXINIT() end
+                                    105 	.area GSFINAL
+      000000 CCr00r68         [ 2]  106 	jp	__sdcc_program_startup
+                                    107 ;--------------------------------------------------------
+                                    108 ; Home
+                                    109 ;--------------------------------------------------------
+                                    110 	.area HOME
+                                    111 	.area HOME
+      000068                        112 __sdcc_program_startup:
+      000068 CCr00r7F         [ 2]  113 	jp	_main
+                                    114 ;	return from main will return to caller
+                                    115 ;--------------------------------------------------------
+                                    116 ; code
+                                    117 ;--------------------------------------------------------
+                                    118 	.area CODE
+                                    119 ;	main.c: 5: void clk_init()
+                                    120 ;	-----------------------------------------
+                                    121 ;	 function clk_init
+                                    122 ;	-----------------------------------------
+      000000                        123 _clk_init:
+                                    124 ;	main.c: 8: while(CLK_ICKR&CLK_ICKR_HSIRDY!=CLK_ICKR_HSIRDY);//检查HSI准备好没有
+      000000                        125 00101$:
+      000000 C6 50 C0         [ 1]  126 	ld	a, 0x50c0
+      000003 4F               [ 1]  127 	clr	a
+      000004 4D               [ 1]  128 	tnz	a
+      000005 26 F9            [ 1]  129 	jrne	00101$
+                                    130 ;	main.c: 9: while(CLK_CMSR&CLK_CMSR_CKM_HSI!=CLK_CMSR_CKM_HSI);//检查主时钟是否为HSI
+      000007                        131 00104$:
+      000007 C6 50 C3         [ 1]  132 	ld	a, 0x50c3
+      00000A 4F               [ 1]  133 	clr	a
+      00000B 4D               [ 1]  134 	tnz	a
+      00000C 26 F9            [ 1]  135 	jrne	00104$
+                                    136 ;	main.c: 10: CLK_CKDIVR&=~CLK_CKDIVR_HSIDIV_MASK;
+      00000E C6 50 C6         [ 1]  137 	ld	a, 0x50c6
+      000011 A4 E7            [ 1]  138 	and	a, #0xe7
+      000013 C7 50 C6         [ 1]  139 	ld	0x50c6, a
+                                    140 ;	main.c: 11: CLK_CKDIVR|=CLK_CKDIVR_HSIDIV_DIV1;//HSI作为主时钟最初是8分频，变成1分频快点
+      000016 C6 50 C6         [ 1]  141 	ld	a, 0x50c6
+      000019 C7 50 C6         [ 1]  142 	ld	0x50c6, a
+                                    143 ;	main.c: 12: CLK_PCKENR1&=~(CLK_PCKENR1_I2C|
+      00001C C6 50 C7         [ 1]  144 	ld	a, 0x50c7
+      00001F A4 54            [ 1]  145 	and	a, #0x54
+      000021 C7 50 C7         [ 1]  146 	ld	0x50c7, a
+                                    147 ;	main.c: 17: CLK_PCKENR2&=~(CLK_PCKENR2_ADC|
+      000024 C6 50 CA         [ 1]  148 	ld	a, 0x50ca
+      000027 A4 F3            [ 1]  149 	and	a, #0xf3
+      000029 C7 50 CA         [ 1]  150 	ld	0x50ca, a
+                                    151 ;	main.c: 20: }
+      00002C 81               [ 4]  152 	ret
+                                    153 ;	main.c: 22: void pb5_init()
+                                    154 ;	-----------------------------------------
+                                    155 ;	 function pb5_init
+                                    156 ;	-----------------------------------------
+      00002D                        157 _pb5_init:
+                                    158 ;	main.c: 24: PB_DDR|=PX_DDR_DDR5;//DDR PB5输出模式
+      00002D 72 1A 50 07      [ 1]  159 	bset	20487, #5
+                                    160 ;	main.c: 25: PB_CR1|=PX_CR1_C15; //CR1 推挽输出
+      000031 72 1A 50 08      [ 1]  161 	bset	20488, #5
+                                    162 ;	main.c: 26: PB_CR2|=PX_CR2_C25; //CR2 输出速度10MHz
+      000035 72 1A 50 09      [ 1]  163 	bset	20489, #5
+                                    164 ;	main.c: 27: }
+      000039 81               [ 4]  165 	ret
+                                    166 ;	main.c: 29: void tim4_init()//16MHz输入
+                                    167 ;	-----------------------------------------
+                                    168 ;	 function tim4_init
+                                    169 ;	-----------------------------------------
+      00003A                        170 _tim4_init:
+                                    171 ;	main.c: 31: TIM4_PSCR|=TIMX_PSCR_PSC_(8);//定时器分频 计数器速度2MHz
+      00003A 72 14 53 47      [ 1]  172 	bset	21319, #2
+                                    173 ;	main.c: 32: TIM4_ARR|=TIMX_ARR_ARR_(200);//自动重装载值 0.1ms
+      00003E C6 53 48         [ 1]  174 	ld	a, 0x5348
+      000041 AA C7            [ 1]  175 	or	a, #0xc7
+      000043 C7 53 48         [ 1]  176 	ld	0x5348, a
+                                    177 ;	main.c: 33: TIM4_IER|=TIMX_IER_UIE;//开中断
+      000046 72 10 53 43      [ 1]  178 	bset	21315, #0
+                                    179 ;	main.c: 34: TIM4_CR1|=TIMX_CR1_APRE;//自动重装载预装载
+      00004A 72 1E 53 40      [ 1]  180 	bset	21312, #7
+                                    181 ;	main.c: 35: TIM4_CR1|=TIMX_CR1_CEN;//计时器使能
+      00004E 72 10 53 40      [ 1]  182 	bset	21312, #0
+                                    183 ;	main.c: 36: }
+      000052 81               [ 4]  184 	ret
+                                    185 ;	main.c: 38: void delay(unsigned long count) {
+                                    186 ;	-----------------------------------------
+                                    187 ;	 function delay
+                                    188 ;	-----------------------------------------
+      000053                        189 _delay:
+      000053 52 08            [ 2]  190 	sub	sp, #8
+                                    191 ;	main.c: 39: while (count--)
+      000055 16 0D            [ 2]  192 	ldw	y, (0x0d, sp)
+      000057 17 07            [ 2]  193 	ldw	(0x07, sp), y
+      000059 1E 0B            [ 2]  194 	ldw	x, (0x0b, sp)
+      00005B                        195 00101$:
+      00005B 1F 01            [ 2]  196 	ldw	(0x01, sp), x
+      00005D 7B 07            [ 1]  197 	ld	a, (0x07, sp)
+      00005F 6B 03            [ 1]  198 	ld	(0x03, sp), a
+      000061 7B 08            [ 1]  199 	ld	a, (0x08, sp)
+      000063 16 07            [ 2]  200 	ldw	y, (0x07, sp)
+      000065 72 A2 00 01      [ 2]  201 	subw	y, #0x0001
+      000069 17 07            [ 2]  202 	ldw	(0x07, sp), y
+      00006B 24 01            [ 1]  203 	jrnc	00117$
+      00006D 5A               [ 2]  204 	decw	x
+      00006E                        205 00117$:
+      00006E 4D               [ 1]  206 	tnz	a
+      00006F 26 08            [ 1]  207 	jrne	00118$
+      000071 16 02            [ 2]  208 	ldw	y, (0x02, sp)
+      000073 26 04            [ 1]  209 	jrne	00118$
+      000075 0D 01            [ 1]  210 	tnz	(0x01, sp)
+      000077 27 03            [ 1]  211 	jreq	00104$
+      000079                        212 00118$:
+                                    213 ;	main.c: 40: __asm__("nop");//sdcc内嵌入汇编
+      000079 9D               [ 1]  214 	nop
+      00007A 20 DF            [ 2]  215 	jra	00101$
+      00007C                        216 00104$:
+                                    217 ;	main.c: 41: }
+      00007C 5B 08            [ 2]  218 	addw	sp, #8
+      00007E 81               [ 4]  219 	ret
+                                    220 ;	main.c: 43: void main()
+                                    221 ;	-----------------------------------------
+                                    222 ;	 function main
+                                    223 ;	-----------------------------------------
+      00007F                        224 _main:
+                                    225 ;	main.c: 45: clk_init();
+      00007F CDr00r00         [ 4]  226 	call	_clk_init
+                                    227 ;	main.c: 46: pb5_init();
+      000082 CDr00r2D         [ 4]  228 	call	_pb5_init
+                                    229 ;	main.c: 47: tim4_init();
+      000085 CDr00r3A         [ 4]  230 	call	_tim4_init
+                                    231 ;	main.c: 48: while(1)
+      000088                        232 00102$:
+      000088 20 FE            [ 2]  233 	jra	00102$
+                                    234 ;	main.c: 55: }
+      00008A 81               [ 4]  235 	ret
+                                    236 ;	main.c: 59: void TIM4_UPD_OVF_IRQHandler(void) __interrupt(23)
+                                    237 ;	-----------------------------------------
+                                    238 ;	 function TIM4_UPD_OVF_IRQHandler
+                                    239 ;	-----------------------------------------
+      00008B                        240 _TIM4_UPD_OVF_IRQHandler:
+      00008B 88               [ 1]  241 	push	a
+                                    242 ;	main.c: 61: all_tmp++;
+      00008C CEu00u00         [ 2]  243 	ldw	x, _all_tmp+0
+      00008F 5C               [ 1]  244 	incw	x
+                                    245 ;	main.c: 62: if(all_tmp==1000)
+      000090 CFu00u00         [ 2]  246 	ldw	_all_tmp+0, x
+      000093 A3 03 E8         [ 2]  247 	cpw	x, #0x03e8
+      000096 26 1C            [ 1]  248 	jrne	00105$
+                                    249 ;	main.c: 64: all_tmp=0;
+      000098 5F               [ 1]  250 	clrw	x
+      000099 CFu00u00         [ 2]  251 	ldw	_all_tmp+0, x
+                                    252 ;	main.c: 65: if(PB_ODR&PX_ODR_ODR5!=PX_ODR_ODR5)
+      00009C C6 50 05         [ 1]  253 	ld	a, 0x5005
+      00009F 0F 01            [ 1]  254 	clr	(0x01, sp)
+      0000A1 C6 50 05         [ 1]  255 	ld	a, 0x5005
+      0000A4 0D 01            [ 1]  256 	tnz	(0x01, sp)
+      0000A6 27 07            [ 1]  257 	jreq	00102$
+                                    258 ;	main.c: 66: PB_ODR&=~PX_ODR_ODR5;
+      0000A8 A4 DF            [ 1]  259 	and	a, #0xdf
+      0000AA C7 50 05         [ 1]  260 	ld	0x5005, a
+      0000AD 20 05            [ 2]  261 	jra	00105$
+      0000AF                        262 00102$:
+                                    263 ;	main.c: 68: PB_ODR|=PX_ODR_ODR5;
+      0000AF AA 20            [ 1]  264 	or	a, #0x20
+      0000B1 C7 50 05         [ 1]  265 	ld	0x5005, a
+      0000B4                        266 00105$:
+                                    267 ;	main.c: 70: TIM4_SR&=~TIMX_SR_UIF;
+      0000B4 72 11 53 44      [ 1]  268 	bres	21316, #0
+                                    269 ;	main.c: 71: }
+      0000B8 84               [ 1]  270 	pop	a
+      0000B9 80               [11]  271 	iret
+                                    272 	.area CODE
+                                    273 	.area CONST
+                                    274 	.area INITIALIZER
+      000000                        275 __xinit__all_tmp:
+      000000 00 00                  276 	.dw #0x0000
+                                    277 	.area CABS (ABS)
