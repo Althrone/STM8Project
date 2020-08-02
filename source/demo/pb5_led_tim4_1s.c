@@ -35,11 +35,6 @@ void tim4_init()//16MHz输入
     TIM4_CR1|=TIMX_CR1_CEN;//计时器使能
 }
 
-// void delay(unsigned long count) {
-//     while (count--)
-//         __asm__("nop");//sdcc内嵌入汇编
-// }
-
 uint16_t all_tmp=0;
 
 void TIM4_UPD_OVF_IRQHandler(void) __interrupt(23)
@@ -65,11 +60,5 @@ void main()
     pb5_init();
     tim4_init();
     rim();
-    while(1)
-    {
-        // PB_ODR&=~PX_ODR_ODR5;
-        // delay(100000L);
-        // PB_ODR|=PX_ODR_ODR5;
-        // delay(100000L);
-    }
+    while(1);
 }
