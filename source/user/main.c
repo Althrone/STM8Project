@@ -5,8 +5,8 @@
 void clk_init()
 {
     //开机HSI自动开启
-    while(CLK_ICKR&CLK_ICKR_HSIRDY!=CLK_ICKR_HSIRDY);//检查HSI准备好没有
-    while(CLK_CMSR&CLK_CMSR_CKM_HSI!=CLK_CMSR_CKM_HSI);//检查主时钟是否为HSI
+    while((CLK_ICKR&CLK_ICKR_HSIRDY)!=CLK_ICKR_HSIRDY);//检查HSI准备好没有
+    while((CLK_CMSR&CLK_CMSR_CKM_HSI)!=CLK_CMSR_CKM_HSI);//检查主时钟是否为HSI
     CLK_CKDIVR&=~CLK_CKDIVR_HSIDIV_MASK;
     CLK_CKDIVR|=CLK_CKDIVR_HSIDIV_DIV1;//HSI作为主时钟最初是8分频，变成1分频快点
     CLK_PCKENR1&=~(CLK_PCKENR1_I2C|
@@ -29,15 +29,34 @@ void pb5_init()
 void tim4_init()//16MHz输入
 {
     TIM4_PSCR|=TIMX_PSCR_PSC_(8);//定时器分频 计数器速度2MHz
-    TIM4_ARR|=TIMX_ARR_ARR_(200);//自动重装载值 0.1ms
+    TIM4_ARR|=TIMX_ARR_ARR_(56);//自动重装载值 0.1ms
     TIM4_IER|=TIMX_IER_UIE;//开中断
     TIM4_CR1|=TIMX_CR1_APRE;//自动重装载预装载
     TIM4_CR1|=TIMX_CR1_CEN;//计时器使能
 }
 
-void delay(unsigned long count) {
-    while (count--)
-        __asm__("nop");//sdcc内嵌入汇编
+// void delay(unsigned long count) {
+//     while (count--)
+//         __asm__("nop");//sdcc内嵌入汇编
+// }
+
+uint16_t all_tmp=0;
+
+void TIM4_UPD_OVF_IRQHandler(void) __interrupt(23)
+{
+    if((TIM4_SR&TIMX_SR_UIF)==TIMX_SR_UIF)//计数器溢出
+    {
+        TIM4_SR&=~TIMX_SR_UIF;
+        all_tmp++;
+        if (all_tmp>=1000)
+        {
+            all_tmp=0;
+            if((PB_ODR&PX_ODR_ODR5)==PX_ODR_ODR5)
+                PB_ODR&=~PX_ODR_ODR5;
+            else
+                PB_ODR|=PX_ODR_ODR5;
+        }
+    }
 }
 
 void main()
@@ -45,6 +64,7 @@ void main()
     clk_init();
     pb5_init();
     tim4_init();
+    rim();
     while(1)
     {
         // PB_ODR&=~PX_ODR_ODR5;
@@ -53,29 +73,3 @@ void main()
         // delay(100000L);
     }
 }
-
-uint16_t all_tmp=0;
-
-void TIM4_UPD_OVF_IRQHandler(void) __interrupt(23)
-{
-    all_tmp++;
-    if(all_tmp==1000)
-    {
-        all_tmp=0;
-        if(PB_ODR&PX_ODR_ODR5!=PX_ODR_ODR5)
-            PB_ODR&=~PX_ODR_ODR5;
-        else
-            PB_ODR|=PX_ODR_ODR5;
-    }
-    TIM4_SR&=~TIMX_SR_UIF;
-}
-
-// void EXTI_PORTE_IRQHandler(void) __intreeupt(7)
-// {
-
-// }
-
-// void TIM2_CAP_COM_IRQHandler(void) __intreeupt(14);
-// {
-
-// }

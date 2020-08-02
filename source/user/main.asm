@@ -8,9 +8,8 @@
 ;--------------------------------------------------------
 ; Public variables in this module
 ;--------------------------------------------------------
-	.globl _TIM4_UPD_OVF_IRQHandler
 	.globl _main
-	.globl _delay
+	.globl _TIM4_UPD_OVF_IRQHandler
 	.globl _tim4_init
 	.globl _pb5_init
 	.globl _clk_init
@@ -121,17 +120,17 @@ __sdcc_program_startup:
 ;	 function clk_init
 ;	-----------------------------------------
 _clk_init:
-;	main.c: 8: while(CLK_ICKR&CLK_ICKR_HSIRDY!=CLK_ICKR_HSIRDY);//检查HSI准备好没有
+;	main.c: 8: while((CLK_ICKR&CLK_ICKR_HSIRDY)!=CLK_ICKR_HSIRDY);//检查HSI准备好没有
 00101$:
 	ld	a, 0x50c0
-	clr	a
-	tnz	a
+	and	a, #0x02
+	cp	a, #0x02
 	jrne	00101$
-;	main.c: 9: while(CLK_CMSR&CLK_CMSR_CKM_HSI!=CLK_CMSR_CKM_HSI);//检查主时钟是否为HSI
+;	main.c: 9: while((CLK_CMSR&CLK_CMSR_CKM_HSI)!=CLK_CMSR_CKM_HSI);//检查主时钟是否为HSI
 00104$:
 	ld	a, 0x50c3
-	clr	a
-	tnz	a
+	and	a, #0xe1
+	cp	a, #0xe1
 	jrne	00104$
 ;	main.c: 10: CLK_CKDIVR&=~CLK_CKDIVR_HSIDIV_MASK;
 	ld	a, 0x50c6
@@ -170,9 +169,9 @@ _pb5_init:
 _tim4_init:
 ;	main.c: 31: TIM4_PSCR|=TIMX_PSCR_PSC_(8);//定时器分频 计数器速度2MHz
 	bset	21319, #2
-;	main.c: 32: TIM4_ARR|=TIMX_ARR_ARR_(200);//自动重装载值 0.1ms
+;	main.c: 32: TIM4_ARR|=TIMX_ARR_ARR_(56);//自动重装载值 0.1ms
 	ld	a, 0x5348
-	or	a, #0xc7
+	or	a, #0x37
 	ld	0x5348, a
 ;	main.c: 33: TIM4_IER|=TIMX_IER_UIE;//开中断
 	bset	21315, #0
@@ -182,93 +181,67 @@ _tim4_init:
 	bset	21312, #0
 ;	main.c: 36: }
 	ret
-;	main.c: 38: void delay(unsigned long count) {
-;	-----------------------------------------
-;	 function delay
-;	-----------------------------------------
-_delay:
-	sub	sp, #8
-;	main.c: 39: while (count--)
-	ldw	y, (0x0d, sp)
-	ldw	(0x07, sp), y
-	ldw	x, (0x0b, sp)
-00101$:
-	ldw	(0x01, sp), x
-	ld	a, (0x07, sp)
-	ld	(0x03, sp), a
-	ld	a, (0x08, sp)
-	ldw	y, (0x07, sp)
-	subw	y, #0x0001
-	ldw	(0x07, sp), y
-	jrnc	00117$
-	decw	x
-00117$:
-	tnz	a
-	jrne	00118$
-	ldw	y, (0x02, sp)
-	jrne	00118$
-	tnz	(0x01, sp)
-	jreq	00104$
-00118$:
-;	main.c: 40: __asm__("nop");//sdcc内嵌入汇编
-	nop
-	jra	00101$
-00104$:
-;	main.c: 41: }
-	addw	sp, #8
-	ret
-;	main.c: 43: void main()
-;	-----------------------------------------
-;	 function main
-;	-----------------------------------------
-_main:
-;	main.c: 45: clk_init();
-	call	_clk_init
-;	main.c: 46: pb5_init();
-	call	_pb5_init
-;	main.c: 47: tim4_init();
-	call	_tim4_init
-;	main.c: 48: while(1)
-00102$:
-	jra	00102$
-;	main.c: 55: }
-	ret
-;	main.c: 59: void TIM4_UPD_OVF_IRQHandler(void) __interrupt(23)
+;	main.c: 45: void TIM4_UPD_OVF_IRQHandler(void) __interrupt(23)
 ;	-----------------------------------------
 ;	 function TIM4_UPD_OVF_IRQHandler
 ;	-----------------------------------------
 _TIM4_UPD_OVF_IRQHandler:
-	push	a
-;	main.c: 61: all_tmp++;
+;	main.c: 47: if((TIM4_SR&TIMX_SR_UIF)==TIMX_SR_UIF)//计数器溢出
+	ld	a, 0x5344
+	and	a, #0x01
+	dec	a
+	jrne	00108$
+;	main.c: 49: TIM4_SR&=~TIMX_SR_UIF;
+	bres	21316, #0
+;	main.c: 50: all_tmp++;
 	ldw	x, _all_tmp+0
 	incw	x
-;	main.c: 62: if(all_tmp==1000)
+;	main.c: 51: if (all_tmp>=1000)
 	ldw	_all_tmp+0, x
 	cpw	x, #0x03e8
-	jrne	00105$
-;	main.c: 64: all_tmp=0;
+	jrc	00108$
+;	main.c: 53: all_tmp=0;
 	clrw	x
 	ldw	_all_tmp+0, x
-;	main.c: 65: if(PB_ODR&PX_ODR_ODR5!=PX_ODR_ODR5)
+;	main.c: 54: if((PB_ODR&PX_ODR_ODR5)==PX_ODR_ODR5)
 	ld	a, 0x5005
-	clr	(0x01, sp)
+	and	a, #0x20
+	ld	xl, a
 	ld	a, 0x5005
-	tnz	(0x01, sp)
-	jreq	00102$
-;	main.c: 66: PB_ODR&=~PX_ODR_ODR5;
+	push	a
+	ld	a, xl
+	cp	a, #0x20
+	pop	a
+	jrne	00102$
+;	main.c: 55: PB_ODR&=~PX_ODR_ODR5;
 	and	a, #0xdf
 	ld	0x5005, a
-	jra	00105$
+	jra	00108$
 00102$:
-;	main.c: 68: PB_ODR|=PX_ODR_ODR5;
+;	main.c: 57: PB_ODR|=PX_ODR_ODR5;
 	or	a, #0x20
 	ld	0x5005, a
-00105$:
-;	main.c: 70: TIM4_SR&=~TIMX_SR_UIF;
-	bres	21316, #0
-;	main.c: 71: }
-	pop	a
+00108$:
+;	main.c: 69: }
 	iret
+;	main.c: 71: void main()
+;	-----------------------------------------
+;	 function main
+;	-----------------------------------------
+_main:
+;	main.c: 73: clk_init();
+	call	_clk_init
+;	main.c: 74: pb5_init();
+	call	_pb5_init
+;	main.c: 75: tim4_init();
+	call	_tim4_init
+;	main.c: 76: rim();
+	rim
+;	main.c: 77: while(1)
+00102$:
+	jra	00102$
+;	main.c: 84: }
+	ret
 	.area CODE
 	.area CONST
 	.area INITIALIZER

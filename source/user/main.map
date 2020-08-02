@@ -25,7 +25,7 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000003  l_GSFINAL                       
      0000001A  l_GSINIT                        
      0000006B  l_HOME                          
-     000000BA  l_CODE                          
+     0000009D  l_CODE                          
      00008000  s_HOME                          
      0000806B  s_GSINIT                        
      00008085  s_GSFINAL                       
@@ -94,16 +94,16 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CODE                                0000808A    000000BA =         186. bytes (REL,CON)
+CODE                                0000808A    0000009D =         157. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
      0000808A  _clk_init                          main
-     000080B7  _pb5_init                          main
-     000080C4  _tim4_init                         main
-     000080DD  _delay                             main
-     00008109  _main                              main
-     00008115  _TIM4_UPD_OVF_IRQHandler           main
+     000080BB  _pb5_init                          main
+     000080C8  _tim4_init                         main
+     000080E1  _TIM4_UPD_OVF_IRQHandler           main
+     0000811A  _main                              main
+
 ASxxxx Linker V03.00 + NoICE + sdld,  page 9.
 
 Files Linked                              [ module(s) ]

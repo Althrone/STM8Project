@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "stm8-debug",
+            "request": "launch",
+            "name": "Launch Program",
+            "executable": ".\\out\\IAR_STM8\\stm8_demo.out",
+            "cpu": "STM8S103F3P",
+            "interface": "stlink3"
+        }
+    ]
+}
