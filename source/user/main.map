@@ -20,29 +20,30 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000001  l_SSEG                          
      00000001  s_DATA                          
      00000001  s_INITIALIZED                   
-     00000002  l_INITIALIZED                   
-     00000002  l_INITIALIZER                   
      00000003  l_GSFINAL                       
+     00000003  l_INITIALIZED                   
+     00000003  l_INITIALIZER                   
      0000001A  l_GSINIT                        
      0000006B  l_HOME                          
-     0000009D  l_CODE                          
+     0000015E  l_CODE                          
      00008000  s_HOME                          
      0000806B  s_GSINIT                        
      00008085  s_GSFINAL                       
      00008088  s_CONST                         
      00008088  s_INITIALIZER                   
-     0000808A  s_CODE                          
+     0000808B  s_CODE                          
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-INITIALIZED                         00000001    00000002 =           2. bytes (REL,CON)
+INITIALIZED                         00000001    00000003 =           3. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000001  _all_tmp                           main
+     00000001  _num                               main
+     00000002  _all_tmp                           main
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
@@ -85,7 +86,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-INITIALIZER                         00008088    00000002 =           2. bytes (REL,CON)
+INITIALIZER                         00008088    00000003 =           3. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -94,16 +95,16 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CODE                                0000808A    0000009D =         157. bytes (REL,CON)
+CODE                                0000808B    0000015E =         350. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     0000808A  _clk_init                          main
-     000080BB  _pb5_init                          main
-     000080C8  _tim4_init                         main
-     000080E1  _TIM4_UPD_OVF_IRQHandler           main
-     0000811A  _main                              main
-
+     0000808B  _clk_init                          main
+     000080BC  _pb5_init                          main
+     000080C9  _spi_init                          main
+     00008106  _tim4_init                         main
+     0000811F  _TIM4_UPD_OVF_IRQHandler           main
+     000081D9  _main                              main
 ASxxxx Linker V03.00 + NoICE + sdld,  page 9.
 
 Files Linked                              [ module(s) ]

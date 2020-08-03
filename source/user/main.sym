@@ -7,18 +7,21 @@ Symbol Table
     .__.ABS.                                                    =  000000 G
     .__.CPU.                                                    =  000000 L
     .__.H$L.                                                    =  000001 L
-  A _TIM4_UPD_OVF_IRQHandler                                       000057 GR
+  A _TIM4_UPD_OVF_IRQHandler                                       000094 GR
   5 __interrupt_vect                                               000000 R
   6 __sdcc_gs_init_startup                                         000000 R
   6 __sdcc_init_data                                               000000 R
   5 __sdcc_program_startup                                         000068 R
   3 __start__stack                                                 000000 R
-  9 __xinit__all_tmp                                               000000 R
-  2 _all_tmp                                                       000000 GR
+  9 __xinit__all_tmp                                               000001 R
+  9 __xinit__num                                                   000000 R
+  2 _all_tmp                                                       000001 GR
   A _clk_init                                                      000000 GR
-  A _main                                                          000090 GR
+  A _main                                                          00014E GR
+  2 _num                                                           000000 GR
   A _pb5_init                                                      000031 GR
-  A _tim4_init                                                     00003E GR
+  A _spi_init                                                      00003E GR
+  A _tim4_init                                                     00007B GR
     l_DATA                                                         ****** GX
     l_INITIALIZER                                                  ****** GX
     s_DATA                                                         ****** GX
@@ -34,14 +37,14 @@ Area Table
 
    0 _CODE                                      size      0   flags    0
    1 DATA                                       size      0   flags    0
-   2 INITIALIZED                                size      2   flags    0
+   2 INITIALIZED                                size      3   flags    0
    3 SSEG                                       size      1   flags    0
    4 DABS                                       size      0   flags    8
    5 HOME                                       size     6B   flags    0
    6 GSINIT                                     size     1A   flags    0
    7 GSFINAL                                    size      3   flags    0
    8 CONST                                      size      0   flags    0
-   9 INITIALIZER                                size      2   flags    0
-   A CODE                                       size     9D   flags    0
+   9 INITIALIZER                                size      3   flags    0
+   A CODE                                       size    15E   flags    0
    B CABS                                       size      0   flags    8
 
