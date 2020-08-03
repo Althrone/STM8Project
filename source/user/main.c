@@ -57,7 +57,7 @@ void tim4_init()//16MHz输入
     TIM4_CR1|=TIMX_CR1_CEN;//计时器使能
 }
 
-uint8_t num=1;
+uint8_t num=0;
 
 uint16_t all_tmp=0;
 
@@ -67,7 +67,7 @@ void TIM4_UPD_OVF_IRQHandler(void) __interrupt(23)
     {
         TIM4_SR&=~TIMX_SR_UIF;
         all_tmp++;
-        if (all_tmp>=1000)
+        if (all_tmp>=1500)
         {
             all_tmp=0;
             if((PB_ODR&PX_ODR_ODR5)==PX_ODR_ODR5)
@@ -90,8 +90,8 @@ void TIM4_UPD_OVF_IRQHandler(void) __interrupt(23)
             while((SPI_SR&SPIX_SR_TXE)!=SPIX_SR_TXE);
             PC_DDR|=PX_DDR_DDR7;
             num++;
-            if(num==25)
-            num=1;
+            if(num==24)
+            num=0;
             
 
         }

@@ -240,9 +240,9 @@ _TIM4_UPD_OVF_IRQHandler:
 ;	main.c: 69: all_tmp++;
 	ldw	x, _all_tmp+0
 	incw	x
-;	main.c: 70: if (all_tmp>=1000)
+;	main.c: 70: if (all_tmp>=1500)
 	ldw	_all_tmp+0, x
-	cpw	x, #0x03e8
+	cpw	x, #0x05dc
 	jrnc	00187$
 	jp	00122$
 00187$:
@@ -350,12 +350,12 @@ _TIM4_UPD_OVF_IRQHandler:
 	bset	20492, #7
 ;	main.c: 92: num++;
 	inc	_num+0
-;	main.c: 93: if(num==25)
+;	main.c: 93: if(num==24)
 	ld	a, _num+0
-	cp	a, #0x19
+	cp	a, #0x18
 	jrne	00122$
-;	main.c: 94: num=1;
-	mov	_num+0, #0x01
+;	main.c: 94: num=0;
+	clr	_num+0
 00122$:
 ;	main.c: 99: }
 	pop	a
@@ -378,13 +378,13 @@ _main:
 ;	main.c: 110: while(1)
 00102$:
 	jra	00102$
-;	main.c: 122: }
+;	main.c: 114: }
 	ret
 	.area CODE
 	.area CONST
 	.area INITIALIZER
 __xinit__num:
-	.db #0x01	; 1
+	.db #0x00	; 0
 __xinit__all_tmp:
 	.dw #0x0000
 	.area CABS (ABS)

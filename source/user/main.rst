@@ -240,9 +240,9 @@
                                     240 ;	main.c: 69: all_tmp++;
       00812F CE 00 02         [ 2]  241 	ldw	x, _all_tmp+0
       008132 5C               [ 1]  242 	incw	x
-                                    243 ;	main.c: 70: if (all_tmp>=1000)
+                                    243 ;	main.c: 70: if (all_tmp>=1500)
       008133 CF 00 02         [ 2]  244 	ldw	_all_tmp+0, x
-      008136 A3 03 E8         [ 2]  245 	cpw	x, #0x03e8
+      008136 A3 05 DC         [ 2]  245 	cpw	x, #0x05dc
       008139 24 03            [ 1]  246 	jrnc	00187$
       00813B CC 81 D7         [ 2]  247 	jp	00122$
       00813E                        248 00187$:
@@ -350,12 +350,12 @@
       0081C4 72 1E 50 0C      [ 1]  350 	bset	20492, #7
                                     351 ;	main.c: 92: num++;
       0081C8 72 5C 00 01      [ 1]  352 	inc	_num+0
-                                    353 ;	main.c: 93: if(num==25)
+                                    353 ;	main.c: 93: if(num==24)
       0081CC C6 00 01         [ 1]  354 	ld	a, _num+0
-      0081CF A1 19            [ 1]  355 	cp	a, #0x19
+      0081CF A1 18            [ 1]  355 	cp	a, #0x18
       0081D1 26 04            [ 1]  356 	jrne	00122$
-                                    357 ;	main.c: 94: num=1;
-      0081D3 35 01 00 01      [ 1]  358 	mov	_num+0, #0x01
+                                    357 ;	main.c: 94: num=0;
+      0081D3 72 5F 00 01      [ 1]  358 	clr	_num+0
       0081D7                        359 00122$:
                                     360 ;	main.c: 99: }
       0081D7 84               [ 1]  361 	pop	a
@@ -378,13 +378,13 @@
                                     378 ;	main.c: 110: while(1)
       0081E6                        379 00102$:
       0081E6 20 FE            [ 2]  380 	jra	00102$
-                                    381 ;	main.c: 122: }
+                                    381 ;	main.c: 114: }
       0081E8 81               [ 4]  382 	ret
                                     383 	.area CODE
                                     384 	.area CONST
                                     385 	.area INITIALIZER
       008088                        386 __xinit__num:
-      008088 01                     387 	.db #0x01	; 1
+      008088 00                     387 	.db #0x00	; 0
       008089                        388 __xinit__all_tmp:
       008089 00 00                  389 	.dw #0x0000
                                     390 	.area CABS (ABS)
