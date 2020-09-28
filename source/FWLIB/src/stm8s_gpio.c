@@ -227,7 +227,7 @@ void GPIO_ExternalPullUpConfig(GPIO_TypeDef* GPIOx, GPIO_Pin_TypeDef GPIO_Pin, F
   /* Check the parameters */
   assert_param(IS_GPIO_PIN_OK(GPIO_Pin));
   assert_param(IS_FUNCTIONALSTATE_OK(NewState));
-  
+
   if (NewState != DISABLE) /* External Pull-Up Set*/
   {
     GPIOx->CR1 |= (uint8_t)GPIO_Pin;

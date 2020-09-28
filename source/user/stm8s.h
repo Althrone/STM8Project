@@ -85,6 +85,8 @@
  #define _RAISONANCE_
 #elif defined(__ICCSTM8__)
  #define _IAR_
+#elif defined(__SDCC)
+ #define _SDCC_
 #else
  #error "Unsupported Compiler!"          /* Compiler defines not found */
 #endif
@@ -138,6 +140,12 @@
   /*!< Used with memory Models for code less than 64K */
   #define MEMCPY memcpy
  #endif /* STM8S208 or STM8S207 or STM8S007 or STM8AF62Ax or STM8AF52Ax */ 
+#elif defined(_SDCC_)
+ #define CONST const
+ #define FAR
+ #define NEAR
+ #define TINY
+ #define EEPROM
 #else /*_IAR_*/
  #define FAR  __far
  #define NEAR __near
@@ -2730,6 +2738,15 @@ CFG_TypeDef;
  #define trap()                {_asm("trap\n");} /* Trap (soft IT) */
  #define wfi()                 {_asm("wfi\n");}  /* Wait For Interrupt */
  #define halt()                {_asm("halt\n");} /* Halt */
+#elif defined(_SDCC_)
+ #define enableInterrupts()    __asm__("rim\n")  /* enable interrupts */
+ #define disableInterrupts()   __asm__("sim\n")  /* disable interrupts */
+ #define rim()                 __asm__("rim\n")  /* enable interrupts */
+ #define sim()                 __asm__("sim\n")  /* disable interrupts */
+ #define nop()                 __asm__("nop\n")  /* No Operation */
+ #define trap()                __asm__("trap\n") /* Trap (soft IT) */
+ #define wfi()                 __asm__("wfi\n")  /* Wait For Interrupt */
+ #define halt()                __asm__("halt\n") /* Halt */
 #else /*_IAR_*/
  #include <intrinsics.h>
  #define enableInterrupts()    __enable_interrupt()   /* enable interrupts */
@@ -2753,6 +2770,11 @@ CFG_TypeDef;
  #define INTERRUPT_HANDLER(a,b) void a(void) interrupt b
  #define INTERRUPT_HANDLER_TRAP(a) void a(void) trap
 #endif /* _RAISONANCE_ */
+
+#ifdef _SDCC_
+ #define INTERRUPT_HANDLER(a,b) void a(void) __interrupt(b)
+ #define INTERRUPT_HANDLER_TRAP(a) void a(void) __trap
+#endif /* _SDCC_ */
 
 #ifdef _IAR_
  #define STRINGVECTOR(x) #x
