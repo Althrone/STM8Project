@@ -1,9 +1,9 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __74HC595_H
-#define __74HC595_H
+#ifndef __SPI_H
+#define __SPI_H
 
 /* Includes ------------------------------------------------------------------*/
-
+#include "stm8s.h"
 
 /* Exported types ------------------------------------------------------------*/
 
@@ -15,4 +15,4 @@
 
 /* Exported functions ------------------------------------------------------- */
 
-#endif /* __74HC595_H */
+#endif /* __SPI_H */
