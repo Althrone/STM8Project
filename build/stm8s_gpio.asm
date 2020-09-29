@@ -8,7 +8,6 @@
 ;--------------------------------------------------------
 ; Public variables in this module
 ;--------------------------------------------------------
-	.globl _assert_failed
 	.globl _GPIO_DeInit
 	.globl _GPIO_Init
 	.globl _GPIO_Write
@@ -83,63 +82,6 @@ _GPIO_DeInit:
 ;	-----------------------------------------
 _GPIO_Init:
 	sub	sp, #5
-;	source/FWLIB/src/stm8s_gpio.c: 77: assert_param(IS_GPIO_MODE_OK(GPIO_Mode));
-	tnz	(0x0b, sp)
-	jreq	00116$
-	ld	a, (0x0b, sp)
-	cp	a, #0x40
-	jreq	00116$
-	ld	a, (0x0b, sp)
-	cp	a, #0x20
-	jreq	00116$
-	ld	a, (0x0b, sp)
-	cp	a, #0x60
-	jreq	00116$
-	ld	a, (0x0b, sp)
-	cp	a, #0xa0
-	jreq	00116$
-	ld	a, (0x0b, sp)
-	cp	a, #0xe0
-	jreq	00116$
-	ld	a, (0x0b, sp)
-	cp	a, #0x80
-	jreq	00116$
-	ld	a, (0x0b, sp)
-	cp	a, #0xc0
-	jreq	00116$
-	ld	a, (0x0b, sp)
-	cp	a, #0xb0
-	jreq	00116$
-	ld	a, (0x0b, sp)
-	cp	a, #0xf0
-	jreq	00116$
-	ld	a, (0x0b, sp)
-	cp	a, #0x90
-	jreq	00116$
-	ld	a, (0x0b, sp)
-	cp	a, #0xd0
-	jreq	00116$
-	push	#0x4d
-	clrw	x
-	pushw	x
-	push	#0x00
-	push	#<(___str_0 + 0)
-	push	#((___str_0 + 0) >> 8)
-	call	_assert_failed
-	addw	sp, #6
-00116$:
-;	source/FWLIB/src/stm8s_gpio.c: 78: assert_param(IS_GPIO_PIN_OK(GPIO_Pin));
-	tnz	(0x0a, sp)
-	jrne	00151$
-	push	#0x4e
-	clrw	x
-	pushw	x
-	push	#0x00
-	push	#<(___str_0 + 0)
-	push	#((___str_0 + 0) >> 8)
-	call	_assert_failed
-	addw	sp, #6
-00151$:
 ;	source/FWLIB/src/stm8s_gpio.c: 81: GPIOx->CR2 &= (uint8_t)(~(GPIO_Pin));
 	ldw	y, (0x08, sp)
 	ldw	x, y
@@ -325,33 +267,6 @@ _GPIO_ReadInputPin:
 ;	-----------------------------------------
 _GPIO_ExternalPullUpConfig:
 	push	a
-;	source/FWLIB/src/stm8s_gpio.c: 228: assert_param(IS_GPIO_PIN_OK(GPIO_Pin));
-	tnz	(0x06, sp)
-	jrne	00107$
-	push	#0xe4
-	clrw	x
-	pushw	x
-	push	#0x00
-	push	#<(___str_0 + 0)
-	push	#((___str_0 + 0) >> 8)
-	call	_assert_failed
-	addw	sp, #6
-00107$:
-;	source/FWLIB/src/stm8s_gpio.c: 229: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
-	tnz	(0x07, sp)
-	jreq	00109$
-	ld	a, (0x07, sp)
-	dec	a
-	jreq	00109$
-	push	#0xe5
-	clrw	x
-	pushw	x
-	push	#0x00
-	push	#<(___str_0 + 0)
-	push	#((___str_0 + 0) >> 8)
-	call	_assert_failed
-	addw	sp, #6
-00109$:
 ;	source/FWLIB/src/stm8s_gpio.c: 233: GPIOx->CR1 |= (uint8_t)GPIO_Pin;
 	ldw	x, (0x04, sp)
 	addw	x, #0x0003
@@ -378,10 +293,5 @@ _GPIO_ExternalPullUpConfig:
 	ret
 	.area CODE
 	.area CONST
-	.area CONST
-___str_0:
-	.ascii "source/FWLIB/src/stm8s_gpio.c"
-	.db 0x00
-	.area CODE
 	.area INITIALIZER
 	.area CABS (ABS)

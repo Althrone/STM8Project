@@ -5,24 +5,28 @@
 # OBJECTS = main.o
 
 C_DEFS = \
--DUSE_STDPERIPH_DRIVER
+-DUSE_STDPERIPH_DRIVER \
+-D_assert_failed
 
 build/stm8s_gpio.rel: source/FWLIB/src/stm8s_gpio.c
-	sdcc -mstm8 $(C_DEFS) -c source/FWLIB/src/stm8s_gpio.c -o build/stm8s_gpio.rel -Isource/FWLIB/inc -Isource/USER
+	sdcc -mstm8 $(C_DEFS) -Isource/FWLIB/inc -Isource/USER -c source/FWLIB/src/stm8s_gpio.c -o build/stm8s_gpio.rel
+
+build/stm8s_clk.rel: source/FWLIB/src/stm8s_clk.c
+	sdcc -mstm8 $(C_DEFS) -Isource/FWLIB/inc -Isource/USER -c source/FWLIB/src/stm8s_clk.c -o build/stm8s_clk.rel 
 
 build/main.ihx: source/USER/main.c build/stm8s_gpio.rel
-	sdcc -mstm8 $(C_DEFS) source/USER/main.c build/stm8s_gpio.rel -o build/main.ihx -Isource/FWLIB/inc -Isource/USER
+	sdcc -mstm8 $(C_DEFS) -Isource/FWLIB/inc -Isource/USER source/USER/main.c build/stm8s_gpio.rel -o build/main.ihx 
 # build/main.ihx: build/stm8s_gpio.rel build/main.rel
 # 	sdcc -mstm8 build/main.rel build/stm8s_gpio.rel --out-fmt-ihx -o main.ihx $(C_DEFS)
 
 .PHONY: burn aaa bbb ccc
 
 
-aaa: build/stm8s_gpio.rel
+gpio: build/stm8s_gpio.rel
 
-bbb: build/main.rel
+clk: build/stm8s_clk.rel
 
-ccc: build/main.ihx
+main: build/main.ihx
 
 
 burn:

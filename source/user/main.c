@@ -111,6 +111,9 @@ void main()
     // {
         
     // }
+
+    // CLK_DeInit();
+
     GPIO_Init(GPIOB,GPIO_PIN_5,GPIO_MODE_OUT_PP_LOW_FAST);
     GPIO_WriteHigh(GPIOB,GPIO_PIN_5);
 

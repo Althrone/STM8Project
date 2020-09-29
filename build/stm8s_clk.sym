@@ -1,0 +1,53 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000001 L
+  7 _CLKPrescTable                                                 000004 GR
+  9 _CLK_AdjustHSICalibrationValue                                 0002B5 GR
+  9 _CLK_CCOCmd                                                    000083 GR
+  9 _CLK_CCOConfig                                                 0001C2 GR
+  9 _CLK_ClearITPendingBit                                         00032F GR
+  9 _CLK_ClockSecuritySystemEnable                                 00025C GR
+  9 _CLK_ClockSwitchCmd                                            000096 GR
+  9 _CLK_ClockSwitchConfig                                         000106 GR
+  9 _CLK_DeInit                                                    000000 GR
+  9 _CLK_FastHaltWakeUpCmd                                         000037 GR
+  9 _CLK_GetClockFreq                                              000265 GR
+  9 _CLK_GetFlagStatus                                             0002C5 GR
+  9 _CLK_GetITStatus                                               00030F GR
+  9 _CLK_GetSYSCLKSource                                           000261 GR
+  9 _CLK_HSECmd                                                    00004A GR
+  9 _CLK_HSICmd                                                    00005D GR
+  9 _CLK_HSIPrescalerConfig                                        0001B1 GR
+  9 _CLK_ITConfig                                                  0001D7 GR
+  9 _CLK_LSICmd                                                    000070 GR
+  9 _CLK_PeripheralClockConfig                                     0000BC GR
+  9 _CLK_SWIMConfig                                                000249 GR
+  9 _CLK_SYSCLKConfig                                              000217 GR
+  9 _CLK_SYSCLKEmergencyClear                                      0002C0 GR
+  9 _CLK_SlowActiveHaltWakeUpCmd                                   0000A9 GR
+  7 _HSIDivFactor                                                  000000 GR
+    __divulong                                                     ****** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8), page 2.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size      0   flags    0
+   2 INITIALIZED                                size      0   flags    0
+   3 DABS                                       size      0   flags    8
+   4 HOME                                       size      0   flags    0
+   5 GSINIT                                     size      0   flags    0
+   6 GSFINAL                                    size      0   flags    0
+   7 CONST                                      size      C   flags    0
+   8 INITIALIZER                                size      0   flags    0
+   9 CODE                                       size    33F   flags    0
+   A CABS                                       size      0   flags    8
+

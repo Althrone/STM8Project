@@ -1,0 +1,831 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 4.0.0 #11528 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module stm8s_clk
+                                      6 	.optsdcc -mstm8
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _CLKPrescTable
+                                     12 	.globl _HSIDivFactor
+                                     13 	.globl _CLK_DeInit
+                                     14 	.globl _CLK_FastHaltWakeUpCmd
+                                     15 	.globl _CLK_HSECmd
+                                     16 	.globl _CLK_HSICmd
+                                     17 	.globl _CLK_LSICmd
+                                     18 	.globl _CLK_CCOCmd
+                                     19 	.globl _CLK_ClockSwitchCmd
+                                     20 	.globl _CLK_SlowActiveHaltWakeUpCmd
+                                     21 	.globl _CLK_PeripheralClockConfig
+                                     22 	.globl _CLK_ClockSwitchConfig
+                                     23 	.globl _CLK_HSIPrescalerConfig
+                                     24 	.globl _CLK_CCOConfig
+                                     25 	.globl _CLK_ITConfig
+                                     26 	.globl _CLK_SYSCLKConfig
+                                     27 	.globl _CLK_SWIMConfig
+                                     28 	.globl _CLK_ClockSecuritySystemEnable
+                                     29 	.globl _CLK_GetSYSCLKSource
+                                     30 	.globl _CLK_GetClockFreq
+                                     31 	.globl _CLK_AdjustHSICalibrationValue
+                                     32 	.globl _CLK_SYSCLKEmergencyClear
+                                     33 	.globl _CLK_GetFlagStatus
+                                     34 	.globl _CLK_GetITStatus
+                                     35 	.globl _CLK_ClearITPendingBit
+                                     36 ;--------------------------------------------------------
+                                     37 ; ram data
+                                     38 ;--------------------------------------------------------
+                                     39 	.area DATA
+                                     40 ;--------------------------------------------------------
+                                     41 ; ram data
+                                     42 ;--------------------------------------------------------
+                                     43 	.area INITIALIZED
+                                     44 ;--------------------------------------------------------
+                                     45 ; absolute external ram data
+                                     46 ;--------------------------------------------------------
+                                     47 	.area DABS (ABS)
+                                     48 
+                                     49 ; default segment ordering for linker
+                                     50 	.area HOME
+                                     51 	.area GSINIT
+                                     52 	.area GSFINAL
+                                     53 	.area CONST
+                                     54 	.area INITIALIZER
+                                     55 	.area CODE
+                                     56 
+                                     57 ;--------------------------------------------------------
+                                     58 ; global & static initialisations
+                                     59 ;--------------------------------------------------------
+                                     60 	.area HOME
+                                     61 	.area GSINIT
+                                     62 	.area GSFINAL
+                                     63 	.area GSINIT
+                                     64 ;--------------------------------------------------------
+                                     65 ; Home
+                                     66 ;--------------------------------------------------------
+                                     67 	.area HOME
+                                     68 	.area HOME
+                                     69 ;--------------------------------------------------------
+                                     70 ; code
+                                     71 ;--------------------------------------------------------
+                                     72 	.area CODE
+                                     73 ;	source/FWLIB/src/stm8s_clk.c: 72: void CLK_DeInit(void)
+                                     74 ;	-----------------------------------------
+                                     75 ;	 function CLK_DeInit
+                                     76 ;	-----------------------------------------
+      000000                         77 _CLK_DeInit:
+                                     78 ;	source/FWLIB/src/stm8s_clk.c: 74: CLK->ICKR = CLK_ICKR_RESET_VALUE;
+      000000 35 01 50 C0      [ 1]   79 	mov	0x50c0+0, #0x01
+                                     80 ;	source/FWLIB/src/stm8s_clk.c: 75: CLK->ECKR = CLK_ECKR_RESET_VALUE;
+      000004 35 00 50 C1      [ 1]   81 	mov	0x50c1+0, #0x00
+                                     82 ;	source/FWLIB/src/stm8s_clk.c: 76: CLK->SWR  = CLK_SWR_RESET_VALUE;
+      000008 35 E1 50 C4      [ 1]   83 	mov	0x50c4+0, #0xe1
+                                     84 ;	source/FWLIB/src/stm8s_clk.c: 77: CLK->SWCR = CLK_SWCR_RESET_VALUE;
+      00000C 35 00 50 C5      [ 1]   85 	mov	0x50c5+0, #0x00
+                                     86 ;	source/FWLIB/src/stm8s_clk.c: 78: CLK->CKDIVR = CLK_CKDIVR_RESET_VALUE;
+      000010 35 18 50 C6      [ 1]   87 	mov	0x50c6+0, #0x18
+                                     88 ;	source/FWLIB/src/stm8s_clk.c: 79: CLK->PCKENR1 = CLK_PCKENR1_RESET_VALUE;
+      000014 35 FF 50 C7      [ 1]   89 	mov	0x50c7+0, #0xff
+                                     90 ;	source/FWLIB/src/stm8s_clk.c: 80: CLK->PCKENR2 = CLK_PCKENR2_RESET_VALUE;
+      000018 35 FF 50 CA      [ 1]   91 	mov	0x50ca+0, #0xff
+                                     92 ;	source/FWLIB/src/stm8s_clk.c: 81: CLK->CSSR = CLK_CSSR_RESET_VALUE;
+      00001C 35 00 50 C8      [ 1]   93 	mov	0x50c8+0, #0x00
+                                     94 ;	source/FWLIB/src/stm8s_clk.c: 82: CLK->CCOR = CLK_CCOR_RESET_VALUE;
+      000020 35 00 50 C9      [ 1]   95 	mov	0x50c9+0, #0x00
+                                     96 ;	source/FWLIB/src/stm8s_clk.c: 83: while ((CLK->CCOR & CLK_CCOR_CCOEN)!= 0)
+      000024                         97 00101$:
+      000024 C6 50 C9         [ 1]   98 	ld	a, 0x50c9
+      000027 44               [ 1]   99 	srl	a
+      000028 25 FA            [ 1]  100 	jrc	00101$
+                                    101 ;	source/FWLIB/src/stm8s_clk.c: 85: CLK->CCOR = CLK_CCOR_RESET_VALUE;
+      00002A 35 00 50 C9      [ 1]  102 	mov	0x50c9+0, #0x00
+                                    103 ;	source/FWLIB/src/stm8s_clk.c: 86: CLK->HSITRIMR = CLK_HSITRIMR_RESET_VALUE;
+      00002E 35 00 50 CC      [ 1]  104 	mov	0x50cc+0, #0x00
+                                    105 ;	source/FWLIB/src/stm8s_clk.c: 87: CLK->SWIMCCR = CLK_SWIMCCR_RESET_VALUE;
+      000032 35 00 50 CD      [ 1]  106 	mov	0x50cd+0, #0x00
+                                    107 ;	source/FWLIB/src/stm8s_clk.c: 88: }
+      000036 81               [ 4]  108 	ret
+                                    109 ;	source/FWLIB/src/stm8s_clk.c: 99: void CLK_FastHaltWakeUpCmd(FunctionalState NewState)
+                                    110 ;	-----------------------------------------
+                                    111 ;	 function CLK_FastHaltWakeUpCmd
+                                    112 ;	-----------------------------------------
+      000037                        113 _CLK_FastHaltWakeUpCmd:
+                                    114 ;	source/FWLIB/src/stm8s_clk.c: 107: CLK->ICKR |= CLK_ICKR_FHWU;
+      000037 C6 50 C0         [ 1]  115 	ld	a, 0x50c0
+                                    116 ;	source/FWLIB/src/stm8s_clk.c: 104: if (NewState != DISABLE)
+      00003A 0D 03            [ 1]  117 	tnz	(0x03, sp)
+      00003C 27 06            [ 1]  118 	jreq	00102$
+                                    119 ;	source/FWLIB/src/stm8s_clk.c: 107: CLK->ICKR |= CLK_ICKR_FHWU;
+      00003E AA 04            [ 1]  120 	or	a, #0x04
+      000040 C7 50 C0         [ 1]  121 	ld	0x50c0, a
+      000043 81               [ 4]  122 	ret
+      000044                        123 00102$:
+                                    124 ;	source/FWLIB/src/stm8s_clk.c: 112: CLK->ICKR &= (uint8_t)(~CLK_ICKR_FHWU);
+      000044 A4 FB            [ 1]  125 	and	a, #0xfb
+      000046 C7 50 C0         [ 1]  126 	ld	0x50c0, a
+                                    127 ;	source/FWLIB/src/stm8s_clk.c: 114: }
+      000049 81               [ 4]  128 	ret
+                                    129 ;	source/FWLIB/src/stm8s_clk.c: 121: void CLK_HSECmd(FunctionalState NewState)
+                                    130 ;	-----------------------------------------
+                                    131 ;	 function CLK_HSECmd
+                                    132 ;	-----------------------------------------
+      00004A                        133 _CLK_HSECmd:
+                                    134 ;	source/FWLIB/src/stm8s_clk.c: 129: CLK->ECKR |= CLK_ECKR_HSEEN;
+      00004A C6 50 C1         [ 1]  135 	ld	a, 0x50c1
+                                    136 ;	source/FWLIB/src/stm8s_clk.c: 126: if (NewState != DISABLE)
+      00004D 0D 03            [ 1]  137 	tnz	(0x03, sp)
+      00004F 27 06            [ 1]  138 	jreq	00102$
+                                    139 ;	source/FWLIB/src/stm8s_clk.c: 129: CLK->ECKR |= CLK_ECKR_HSEEN;
+      000051 AA 01            [ 1]  140 	or	a, #0x01
+      000053 C7 50 C1         [ 1]  141 	ld	0x50c1, a
+      000056 81               [ 4]  142 	ret
+      000057                        143 00102$:
+                                    144 ;	source/FWLIB/src/stm8s_clk.c: 134: CLK->ECKR &= (uint8_t)(~CLK_ECKR_HSEEN);
+      000057 A4 FE            [ 1]  145 	and	a, #0xfe
+      000059 C7 50 C1         [ 1]  146 	ld	0x50c1, a
+                                    147 ;	source/FWLIB/src/stm8s_clk.c: 136: }
+      00005C 81               [ 4]  148 	ret
+                                    149 ;	source/FWLIB/src/stm8s_clk.c: 143: void CLK_HSICmd(FunctionalState NewState)
+                                    150 ;	-----------------------------------------
+                                    151 ;	 function CLK_HSICmd
+                                    152 ;	-----------------------------------------
+      00005D                        153 _CLK_HSICmd:
+                                    154 ;	source/FWLIB/src/stm8s_clk.c: 151: CLK->ICKR |= CLK_ICKR_HSIEN;
+      00005D C6 50 C0         [ 1]  155 	ld	a, 0x50c0
+                                    156 ;	source/FWLIB/src/stm8s_clk.c: 148: if (NewState != DISABLE)
+      000060 0D 03            [ 1]  157 	tnz	(0x03, sp)
+      000062 27 06            [ 1]  158 	jreq	00102$
+                                    159 ;	source/FWLIB/src/stm8s_clk.c: 151: CLK->ICKR |= CLK_ICKR_HSIEN;
+      000064 AA 01            [ 1]  160 	or	a, #0x01
+      000066 C7 50 C0         [ 1]  161 	ld	0x50c0, a
+      000069 81               [ 4]  162 	ret
+      00006A                        163 00102$:
+                                    164 ;	source/FWLIB/src/stm8s_clk.c: 156: CLK->ICKR &= (uint8_t)(~CLK_ICKR_HSIEN);
+      00006A A4 FE            [ 1]  165 	and	a, #0xfe
+      00006C C7 50 C0         [ 1]  166 	ld	0x50c0, a
+                                    167 ;	source/FWLIB/src/stm8s_clk.c: 158: }
+      00006F 81               [ 4]  168 	ret
+                                    169 ;	source/FWLIB/src/stm8s_clk.c: 166: void CLK_LSICmd(FunctionalState NewState)
+                                    170 ;	-----------------------------------------
+                                    171 ;	 function CLK_LSICmd
+                                    172 ;	-----------------------------------------
+      000070                        173 _CLK_LSICmd:
+                                    174 ;	source/FWLIB/src/stm8s_clk.c: 174: CLK->ICKR |= CLK_ICKR_LSIEN;
+      000070 C6 50 C0         [ 1]  175 	ld	a, 0x50c0
+                                    176 ;	source/FWLIB/src/stm8s_clk.c: 171: if (NewState != DISABLE)
+      000073 0D 03            [ 1]  177 	tnz	(0x03, sp)
+      000075 27 06            [ 1]  178 	jreq	00102$
+                                    179 ;	source/FWLIB/src/stm8s_clk.c: 174: CLK->ICKR |= CLK_ICKR_LSIEN;
+      000077 AA 08            [ 1]  180 	or	a, #0x08
+      000079 C7 50 C0         [ 1]  181 	ld	0x50c0, a
+      00007C 81               [ 4]  182 	ret
+      00007D                        183 00102$:
+                                    184 ;	source/FWLIB/src/stm8s_clk.c: 179: CLK->ICKR &= (uint8_t)(~CLK_ICKR_LSIEN);
+      00007D A4 F7            [ 1]  185 	and	a, #0xf7
+      00007F C7 50 C0         [ 1]  186 	ld	0x50c0, a
+                                    187 ;	source/FWLIB/src/stm8s_clk.c: 181: }
+      000082 81               [ 4]  188 	ret
+                                    189 ;	source/FWLIB/src/stm8s_clk.c: 189: void CLK_CCOCmd(FunctionalState NewState)
+                                    190 ;	-----------------------------------------
+                                    191 ;	 function CLK_CCOCmd
+                                    192 ;	-----------------------------------------
+      000083                        193 _CLK_CCOCmd:
+                                    194 ;	source/FWLIB/src/stm8s_clk.c: 197: CLK->CCOR |= CLK_CCOR_CCOEN;
+      000083 C6 50 C9         [ 1]  195 	ld	a, 0x50c9
+                                    196 ;	source/FWLIB/src/stm8s_clk.c: 194: if (NewState != DISABLE)
+      000086 0D 03            [ 1]  197 	tnz	(0x03, sp)
+      000088 27 06            [ 1]  198 	jreq	00102$
+                                    199 ;	source/FWLIB/src/stm8s_clk.c: 197: CLK->CCOR |= CLK_CCOR_CCOEN;
+      00008A AA 01            [ 1]  200 	or	a, #0x01
+      00008C C7 50 C9         [ 1]  201 	ld	0x50c9, a
+      00008F 81               [ 4]  202 	ret
+      000090                        203 00102$:
+                                    204 ;	source/FWLIB/src/stm8s_clk.c: 202: CLK->CCOR &= (uint8_t)(~CLK_CCOR_CCOEN);
+      000090 A4 FE            [ 1]  205 	and	a, #0xfe
+      000092 C7 50 C9         [ 1]  206 	ld	0x50c9, a
+                                    207 ;	source/FWLIB/src/stm8s_clk.c: 204: }
+      000095 81               [ 4]  208 	ret
+                                    209 ;	source/FWLIB/src/stm8s_clk.c: 213: void CLK_ClockSwitchCmd(FunctionalState NewState)
+                                    210 ;	-----------------------------------------
+                                    211 ;	 function CLK_ClockSwitchCmd
+                                    212 ;	-----------------------------------------
+      000096                        213 _CLK_ClockSwitchCmd:
+                                    214 ;	source/FWLIB/src/stm8s_clk.c: 221: CLK->SWCR |= CLK_SWCR_SWEN;
+      000096 C6 50 C5         [ 1]  215 	ld	a, 0x50c5
+                                    216 ;	source/FWLIB/src/stm8s_clk.c: 218: if (NewState != DISABLE )
+      000099 0D 03            [ 1]  217 	tnz	(0x03, sp)
+      00009B 27 06            [ 1]  218 	jreq	00102$
+                                    219 ;	source/FWLIB/src/stm8s_clk.c: 221: CLK->SWCR |= CLK_SWCR_SWEN;
+      00009D AA 02            [ 1]  220 	or	a, #0x02
+      00009F C7 50 C5         [ 1]  221 	ld	0x50c5, a
+      0000A2 81               [ 4]  222 	ret
+      0000A3                        223 00102$:
+                                    224 ;	source/FWLIB/src/stm8s_clk.c: 226: CLK->SWCR &= (uint8_t)(~CLK_SWCR_SWEN);
+      0000A3 A4 FD            [ 1]  225 	and	a, #0xfd
+      0000A5 C7 50 C5         [ 1]  226 	ld	0x50c5, a
+                                    227 ;	source/FWLIB/src/stm8s_clk.c: 228: }
+      0000A8 81               [ 4]  228 	ret
+                                    229 ;	source/FWLIB/src/stm8s_clk.c: 238: void CLK_SlowActiveHaltWakeUpCmd(FunctionalState NewState)
+                                    230 ;	-----------------------------------------
+                                    231 ;	 function CLK_SlowActiveHaltWakeUpCmd
+                                    232 ;	-----------------------------------------
+      0000A9                        233 _CLK_SlowActiveHaltWakeUpCmd:
+                                    234 ;	source/FWLIB/src/stm8s_clk.c: 246: CLK->ICKR |= CLK_ICKR_SWUAH;
+      0000A9 C6 50 C0         [ 1]  235 	ld	a, 0x50c0
+                                    236 ;	source/FWLIB/src/stm8s_clk.c: 243: if (NewState != DISABLE)
+      0000AC 0D 03            [ 1]  237 	tnz	(0x03, sp)
+      0000AE 27 06            [ 1]  238 	jreq	00102$
+                                    239 ;	source/FWLIB/src/stm8s_clk.c: 246: CLK->ICKR |= CLK_ICKR_SWUAH;
+      0000B0 AA 20            [ 1]  240 	or	a, #0x20
+      0000B2 C7 50 C0         [ 1]  241 	ld	0x50c0, a
+      0000B5 81               [ 4]  242 	ret
+      0000B6                        243 00102$:
+                                    244 ;	source/FWLIB/src/stm8s_clk.c: 251: CLK->ICKR &= (uint8_t)(~CLK_ICKR_SWUAH);
+      0000B6 A4 DF            [ 1]  245 	and	a, #0xdf
+      0000B8 C7 50 C0         [ 1]  246 	ld	0x50c0, a
+                                    247 ;	source/FWLIB/src/stm8s_clk.c: 253: }
+      0000BB 81               [ 4]  248 	ret
+                                    249 ;	source/FWLIB/src/stm8s_clk.c: 263: void CLK_PeripheralClockConfig(CLK_Peripheral_TypeDef CLK_Peripheral, FunctionalState NewState)
+                                    250 ;	-----------------------------------------
+                                    251 ;	 function CLK_PeripheralClockConfig
+                                    252 ;	-----------------------------------------
+      0000BC                        253 _CLK_PeripheralClockConfig:
+      0000BC 52 02            [ 2]  254 	sub	sp, #2
+                                    255 ;	source/FWLIB/src/stm8s_clk.c: 274: CLK->PCKENR1 |= (uint8_t)((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F));
+      0000BE 7B 05            [ 1]  256 	ld	a, (0x05, sp)
+      0000C0 A4 0F            [ 1]  257 	and	a, #0x0f
+      0000C2 88               [ 1]  258 	push	a
+      0000C3 A6 01            [ 1]  259 	ld	a, #0x01
+      0000C5 6B 02            [ 1]  260 	ld	(0x02, sp), a
+      0000C7 84               [ 1]  261 	pop	a
+      0000C8 4D               [ 1]  262 	tnz	a
+      0000C9 27 05            [ 1]  263 	jreq	00128$
+      0000CB                        264 00127$:
+      0000CB 08 01            [ 1]  265 	sll	(0x01, sp)
+      0000CD 4A               [ 1]  266 	dec	a
+      0000CE 26 FB            [ 1]  267 	jrne	00127$
+      0000D0                        268 00128$:
+                                    269 ;	source/FWLIB/src/stm8s_clk.c: 279: CLK->PCKENR1 &= (uint8_t)(~(uint8_t)(((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F))));
+      0000D0 7B 01            [ 1]  270 	ld	a, (0x01, sp)
+      0000D2 43               [ 1]  271 	cpl	a
+      0000D3 6B 02            [ 1]  272 	ld	(0x02, sp), a
+                                    273 ;	source/FWLIB/src/stm8s_clk.c: 269: if (((uint8_t)CLK_Peripheral & (uint8_t)0x10) == 0x00)
+      0000D5 7B 05            [ 1]  274 	ld	a, (0x05, sp)
+      0000D7 A5 10            [ 1]  275 	bcp	a, #0x10
+      0000D9 26 15            [ 1]  276 	jrne	00108$
+                                    277 ;	source/FWLIB/src/stm8s_clk.c: 274: CLK->PCKENR1 |= (uint8_t)((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F));
+      0000DB C6 50 C7         [ 1]  278 	ld	a, 0x50c7
+                                    279 ;	source/FWLIB/src/stm8s_clk.c: 271: if (NewState != DISABLE)
+      0000DE 0D 06            [ 1]  280 	tnz	(0x06, sp)
+      0000E0 27 07            [ 1]  281 	jreq	00102$
+                                    282 ;	source/FWLIB/src/stm8s_clk.c: 274: CLK->PCKENR1 |= (uint8_t)((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F));
+      0000E2 1A 01            [ 1]  283 	or	a, (0x01, sp)
+      0000E4 C7 50 C7         [ 1]  284 	ld	0x50c7, a
+      0000E7 20 1A            [ 2]  285 	jra	00110$
+      0000E9                        286 00102$:
+                                    287 ;	source/FWLIB/src/stm8s_clk.c: 279: CLK->PCKENR1 &= (uint8_t)(~(uint8_t)(((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F))));
+      0000E9 14 02            [ 1]  288 	and	a, (0x02, sp)
+      0000EB C7 50 C7         [ 1]  289 	ld	0x50c7, a
+      0000EE 20 13            [ 2]  290 	jra	00110$
+      0000F0                        291 00108$:
+                                    292 ;	source/FWLIB/src/stm8s_clk.c: 287: CLK->PCKENR2 |= (uint8_t)((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F));
+      0000F0 C6 50 CA         [ 1]  293 	ld	a, 0x50ca
+                                    294 ;	source/FWLIB/src/stm8s_clk.c: 284: if (NewState != DISABLE)
+      0000F3 0D 06            [ 1]  295 	tnz	(0x06, sp)
+      0000F5 27 07            [ 1]  296 	jreq	00105$
+                                    297 ;	source/FWLIB/src/stm8s_clk.c: 287: CLK->PCKENR2 |= (uint8_t)((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F));
+      0000F7 1A 01            [ 1]  298 	or	a, (0x01, sp)
+      0000F9 C7 50 CA         [ 1]  299 	ld	0x50ca, a
+      0000FC 20 05            [ 2]  300 	jra	00110$
+      0000FE                        301 00105$:
+                                    302 ;	source/FWLIB/src/stm8s_clk.c: 292: CLK->PCKENR2 &= (uint8_t)(~(uint8_t)(((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F))));
+      0000FE 14 02            [ 1]  303 	and	a, (0x02, sp)
+      000100 C7 50 CA         [ 1]  304 	ld	0x50ca, a
+      000103                        305 00110$:
+                                    306 ;	source/FWLIB/src/stm8s_clk.c: 295: }
+      000103 5B 02            [ 2]  307 	addw	sp, #2
+      000105 81               [ 4]  308 	ret
+                                    309 ;	source/FWLIB/src/stm8s_clk.c: 309: ErrorStatus CLK_ClockSwitchConfig(CLK_SwitchMode_TypeDef CLK_SwitchMode, CLK_Source_TypeDef CLK_NewClock, FunctionalState ITState, CLK_CurrentClockState_TypeDef CLK_CurrentClockState)
+                                    310 ;	-----------------------------------------
+                                    311 ;	 function CLK_ClockSwitchConfig
+                                    312 ;	-----------------------------------------
+      000106                        313 _CLK_ClockSwitchConfig:
+                                    314 ;	source/FWLIB/src/stm8s_clk.c: 322: clock_master = (CLK_Source_TypeDef)CLK->CMSR;
+      000106 C6 50 C3         [ 1]  315 	ld	a, 0x50c3
+      000109 90 97            [ 1]  316 	ld	yl, a
+                                    317 ;	source/FWLIB/src/stm8s_clk.c: 328: CLK->SWCR |= CLK_SWCR_SWEN;
+      00010B C6 50 C5         [ 1]  318 	ld	a, 0x50c5
+                                    319 ;	source/FWLIB/src/stm8s_clk.c: 325: if (CLK_SwitchMode == CLK_SWITCHMODE_AUTO)
+      00010E 88               [ 1]  320 	push	a
+      00010F 7B 04            [ 1]  321 	ld	a, (0x04, sp)
+      000111 4A               [ 1]  322 	dec	a
+      000112 84               [ 1]  323 	pop	a
+      000113 26 37            [ 1]  324 	jrne	00122$
+                                    325 ;	source/FWLIB/src/stm8s_clk.c: 328: CLK->SWCR |= CLK_SWCR_SWEN;
+      000115 AA 02            [ 1]  326 	or	a, #0x02
+      000117 C7 50 C5         [ 1]  327 	ld	0x50c5, a
+      00011A C6 50 C5         [ 1]  328 	ld	a, 0x50c5
+                                    329 ;	source/FWLIB/src/stm8s_clk.c: 331: if (ITState != DISABLE)
+      00011D 0D 05            [ 1]  330 	tnz	(0x05, sp)
+      00011F 27 07            [ 1]  331 	jreq	00102$
+                                    332 ;	source/FWLIB/src/stm8s_clk.c: 333: CLK->SWCR |= CLK_SWCR_SWIEN;
+      000121 AA 04            [ 1]  333 	or	a, #0x04
+      000123 C7 50 C5         [ 1]  334 	ld	0x50c5, a
+      000126 20 05            [ 2]  335 	jra	00103$
+      000128                        336 00102$:
+                                    337 ;	source/FWLIB/src/stm8s_clk.c: 337: CLK->SWCR &= (uint8_t)(~CLK_SWCR_SWIEN);
+      000128 A4 FB            [ 1]  338 	and	a, #0xfb
+      00012A C7 50 C5         [ 1]  339 	ld	0x50c5, a
+      00012D                        340 00103$:
+                                    341 ;	source/FWLIB/src/stm8s_clk.c: 341: CLK->SWR = (uint8_t)CLK_NewClock;
+      00012D AE 50 C4         [ 2]  342 	ldw	x, #0x50c4
+      000130 7B 04            [ 1]  343 	ld	a, (0x04, sp)
+      000132 F7               [ 1]  344 	ld	(x), a
+                                    345 ;	source/FWLIB/src/stm8s_clk.c: 344: while((((CLK->SWCR & CLK_SWCR_SWBSY) != 0 )&& (DownCounter != 0)))
+      000133 5F               [ 1]  346 	clrw	x
+      000134 5A               [ 2]  347 	decw	x
+      000135                        348 00105$:
+      000135 C6 50 C5         [ 1]  349 	ld	a, 0x50c5
+      000138 44               [ 1]  350 	srl	a
+      000139 24 06            [ 1]  351 	jrnc	00107$
+      00013B 5D               [ 2]  352 	tnzw	x
+      00013C 27 03            [ 1]  353 	jreq	00107$
+                                    354 ;	source/FWLIB/src/stm8s_clk.c: 346: DownCounter--;
+      00013E 5A               [ 2]  355 	decw	x
+      00013F 20 F4            [ 2]  356 	jra	00105$
+      000141                        357 00107$:
+                                    358 ;	source/FWLIB/src/stm8s_clk.c: 349: if(DownCounter != 0)
+      000141 5D               [ 2]  359 	tnzw	x
+      000142 27 05            [ 1]  360 	jreq	00109$
+                                    361 ;	source/FWLIB/src/stm8s_clk.c: 351: Swif = SUCCESS;
+      000144 A6 01            [ 1]  362 	ld	a, #0x01
+      000146 97               [ 1]  363 	ld	xl, a
+      000147 20 34            [ 2]  364 	jra	00123$
+      000149                        365 00109$:
+                                    366 ;	source/FWLIB/src/stm8s_clk.c: 355: Swif = ERROR;
+      000149 5F               [ 1]  367 	clrw	x
+      00014A 20 31            [ 2]  368 	jra	00123$
+      00014C                        369 00122$:
+                                    370 ;	source/FWLIB/src/stm8s_clk.c: 361: if (ITState != DISABLE)
+      00014C 0D 05            [ 1]  371 	tnz	(0x05, sp)
+      00014E 27 07            [ 1]  372 	jreq	00112$
+                                    373 ;	source/FWLIB/src/stm8s_clk.c: 363: CLK->SWCR |= CLK_SWCR_SWIEN;
+      000150 AA 04            [ 1]  374 	or	a, #0x04
+      000152 C7 50 C5         [ 1]  375 	ld	0x50c5, a
+      000155 20 05            [ 2]  376 	jra	00113$
+      000157                        377 00112$:
+                                    378 ;	source/FWLIB/src/stm8s_clk.c: 367: CLK->SWCR &= (uint8_t)(~CLK_SWCR_SWIEN);
+      000157 A4 FB            [ 1]  379 	and	a, #0xfb
+      000159 C7 50 C5         [ 1]  380 	ld	0x50c5, a
+      00015C                        381 00113$:
+                                    382 ;	source/FWLIB/src/stm8s_clk.c: 371: CLK->SWR = (uint8_t)CLK_NewClock;
+      00015C AE 50 C4         [ 2]  383 	ldw	x, #0x50c4
+      00015F 7B 04            [ 1]  384 	ld	a, (0x04, sp)
+      000161 F7               [ 1]  385 	ld	(x), a
+                                    386 ;	source/FWLIB/src/stm8s_clk.c: 374: while((((CLK->SWCR & CLK_SWCR_SWIF) != 0 ) && (DownCounter != 0)))
+      000162 5F               [ 1]  387 	clrw	x
+      000163 5A               [ 2]  388 	decw	x
+      000164                        389 00115$:
+      000164 C6 50 C5         [ 1]  390 	ld	a, 0x50c5
+      000167 A5 08            [ 1]  391 	bcp	a, #0x08
+      000169 27 06            [ 1]  392 	jreq	00117$
+      00016B 5D               [ 2]  393 	tnzw	x
+      00016C 27 03            [ 1]  394 	jreq	00117$
+                                    395 ;	source/FWLIB/src/stm8s_clk.c: 376: DownCounter--;
+      00016E 5A               [ 2]  396 	decw	x
+      00016F 20 F3            [ 2]  397 	jra	00115$
+      000171                        398 00117$:
+                                    399 ;	source/FWLIB/src/stm8s_clk.c: 379: if(DownCounter != 0)
+      000171 5D               [ 2]  400 	tnzw	x
+      000172 27 08            [ 1]  401 	jreq	00119$
+                                    402 ;	source/FWLIB/src/stm8s_clk.c: 382: CLK->SWCR |= CLK_SWCR_SWEN;
+      000174 72 12 50 C5      [ 1]  403 	bset	20677, #1
+                                    404 ;	source/FWLIB/src/stm8s_clk.c: 383: Swif = SUCCESS;
+      000178 A6 01            [ 1]  405 	ld	a, #0x01
+      00017A 97               [ 1]  406 	ld	xl, a
+                                    407 ;	source/FWLIB/src/stm8s_clk.c: 387: Swif = ERROR;
+      00017B 21                     408 	.byte 0x21
+      00017C                        409 00119$:
+      00017C 5F               [ 1]  410 	clrw	x
+      00017D                        411 00123$:
+                                    412 ;	source/FWLIB/src/stm8s_clk.c: 390: if(Swif != ERROR)
+      00017D 9F               [ 1]  413 	ld	a, xl
+      00017E 4D               [ 1]  414 	tnz	a
+      00017F 27 2E            [ 1]  415 	jreq	00136$
+                                    416 ;	source/FWLIB/src/stm8s_clk.c: 393: if((CLK_CurrentClockState == CLK_CURRENTCLOCKSTATE_DISABLE) && ( clock_master == CLK_SOURCE_HSI))
+      000181 0D 06            [ 1]  417 	tnz	(0x06, sp)
+      000183 26 0C            [ 1]  418 	jrne	00132$
+      000185 90 9F            [ 1]  419 	ld	a, yl
+      000187 A1 E1            [ 1]  420 	cp	a, #0xe1
+      000189 26 06            [ 1]  421 	jrne	00132$
+                                    422 ;	source/FWLIB/src/stm8s_clk.c: 395: CLK->ICKR &= (uint8_t)(~CLK_ICKR_HSIEN);
+      00018B 72 11 50 C0      [ 1]  423 	bres	20672, #0
+      00018F 20 1E            [ 2]  424 	jra	00136$
+      000191                        425 00132$:
+                                    426 ;	source/FWLIB/src/stm8s_clk.c: 397: else if((CLK_CurrentClockState == CLK_CURRENTCLOCKSTATE_DISABLE) && ( clock_master == CLK_SOURCE_LSI))
+      000191 0D 06            [ 1]  427 	tnz	(0x06, sp)
+      000193 26 0C            [ 1]  428 	jrne	00128$
+      000195 90 9F            [ 1]  429 	ld	a, yl
+      000197 A1 D2            [ 1]  430 	cp	a, #0xd2
+      000199 26 06            [ 1]  431 	jrne	00128$
+                                    432 ;	source/FWLIB/src/stm8s_clk.c: 399: CLK->ICKR &= (uint8_t)(~CLK_ICKR_LSIEN);
+      00019B 72 17 50 C0      [ 1]  433 	bres	20672, #3
+      00019F 20 0E            [ 2]  434 	jra	00136$
+      0001A1                        435 00128$:
+                                    436 ;	source/FWLIB/src/stm8s_clk.c: 401: else if ((CLK_CurrentClockState == CLK_CURRENTCLOCKSTATE_DISABLE) && ( clock_master == CLK_SOURCE_HSE))
+      0001A1 0D 06            [ 1]  437 	tnz	(0x06, sp)
+      0001A3 26 0A            [ 1]  438 	jrne	00136$
+      0001A5 90 9F            [ 1]  439 	ld	a, yl
+      0001A7 A1 B4            [ 1]  440 	cp	a, #0xb4
+      0001A9 26 04            [ 1]  441 	jrne	00136$
+                                    442 ;	source/FWLIB/src/stm8s_clk.c: 403: CLK->ECKR &= (uint8_t)(~CLK_ECKR_HSEEN);
+      0001AB 72 11 50 C1      [ 1]  443 	bres	20673, #0
+      0001AF                        444 00136$:
+                                    445 ;	source/FWLIB/src/stm8s_clk.c: 406: return(Swif);
+      0001AF 9F               [ 1]  446 	ld	a, xl
+                                    447 ;	source/FWLIB/src/stm8s_clk.c: 407: }
+      0001B0 81               [ 4]  448 	ret
+                                    449 ;	source/FWLIB/src/stm8s_clk.c: 415: void CLK_HSIPrescalerConfig(CLK_Prescaler_TypeDef HSIPrescaler)
+                                    450 ;	-----------------------------------------
+                                    451 ;	 function CLK_HSIPrescalerConfig
+                                    452 ;	-----------------------------------------
+      0001B1                        453 _CLK_HSIPrescalerConfig:
+                                    454 ;	source/FWLIB/src/stm8s_clk.c: 421: CLK->CKDIVR &= (uint8_t)(~CLK_CKDIVR_HSIDIV);
+      0001B1 C6 50 C6         [ 1]  455 	ld	a, 0x50c6
+      0001B4 A4 E7            [ 1]  456 	and	a, #0xe7
+      0001B6 C7 50 C6         [ 1]  457 	ld	0x50c6, a
+                                    458 ;	source/FWLIB/src/stm8s_clk.c: 424: CLK->CKDIVR |= (uint8_t)HSIPrescaler;
+      0001B9 C6 50 C6         [ 1]  459 	ld	a, 0x50c6
+      0001BC 1A 03            [ 1]  460 	or	a, (0x03, sp)
+      0001BE C7 50 C6         [ 1]  461 	ld	0x50c6, a
+                                    462 ;	source/FWLIB/src/stm8s_clk.c: 425: }
+      0001C1 81               [ 4]  463 	ret
+                                    464 ;	source/FWLIB/src/stm8s_clk.c: 436: void CLK_CCOConfig(CLK_Output_TypeDef CLK_CCO)
+                                    465 ;	-----------------------------------------
+                                    466 ;	 function CLK_CCOConfig
+                                    467 ;	-----------------------------------------
+      0001C2                        468 _CLK_CCOConfig:
+                                    469 ;	source/FWLIB/src/stm8s_clk.c: 442: CLK->CCOR &= (uint8_t)(~CLK_CCOR_CCOSEL);
+      0001C2 C6 50 C9         [ 1]  470 	ld	a, 0x50c9
+      0001C5 A4 E1            [ 1]  471 	and	a, #0xe1
+      0001C7 C7 50 C9         [ 1]  472 	ld	0x50c9, a
+                                    473 ;	source/FWLIB/src/stm8s_clk.c: 445: CLK->CCOR |= (uint8_t)CLK_CCO;
+      0001CA C6 50 C9         [ 1]  474 	ld	a, 0x50c9
+      0001CD 1A 03            [ 1]  475 	or	a, (0x03, sp)
+      0001CF C7 50 C9         [ 1]  476 	ld	0x50c9, a
+                                    477 ;	source/FWLIB/src/stm8s_clk.c: 448: CLK->CCOR |= CLK_CCOR_CCOEN;
+      0001D2 72 10 50 C9      [ 1]  478 	bset	20681, #0
+                                    479 ;	source/FWLIB/src/stm8s_clk.c: 449: }
+      0001D6 81               [ 4]  480 	ret
+                                    481 ;	source/FWLIB/src/stm8s_clk.c: 459: void CLK_ITConfig(CLK_IT_TypeDef CLK_IT, FunctionalState NewState)
+                                    482 ;	-----------------------------------------
+                                    483 ;	 function CLK_ITConfig
+                                    484 ;	-----------------------------------------
+      0001D7                        485 _CLK_ITConfig:
+      0001D7 88               [ 1]  486 	push	a
+                                    487 ;	source/FWLIB/src/stm8s_clk.c: 467: switch (CLK_IT)
+      0001D8 7B 04            [ 1]  488 	ld	a, (0x04, sp)
+      0001DA A0 0C            [ 1]  489 	sub	a, #0x0c
+      0001DC 26 04            [ 1]  490 	jrne	00140$
+      0001DE 4C               [ 1]  491 	inc	a
+      0001DF 6B 01            [ 1]  492 	ld	(0x01, sp), a
+      0001E1 C5                     493 	.byte 0xc5
+      0001E2                        494 00140$:
+      0001E2 0F 01            [ 1]  495 	clr	(0x01, sp)
+      0001E4                        496 00141$:
+      0001E4 7B 04            [ 1]  497 	ld	a, (0x04, sp)
+      0001E6 A0 1C            [ 1]  498 	sub	a, #0x1c
+      0001E8 26 02            [ 1]  499 	jrne	00143$
+      0001EA 4C               [ 1]  500 	inc	a
+      0001EB 21                     501 	.byte 0x21
+      0001EC                        502 00143$:
+      0001EC 4F               [ 1]  503 	clr	a
+      0001ED                        504 00144$:
+                                    505 ;	source/FWLIB/src/stm8s_clk.c: 465: if (NewState != DISABLE)
+      0001ED 0D 05            [ 1]  506 	tnz	(0x05, sp)
+      0001EF 27 13            [ 1]  507 	jreq	00110$
+                                    508 ;	source/FWLIB/src/stm8s_clk.c: 467: switch (CLK_IT)
+      0001F1 0D 01            [ 1]  509 	tnz	(0x01, sp)
+      0001F3 26 09            [ 1]  510 	jrne	00102$
+      0001F5 4D               [ 1]  511 	tnz	a
+      0001F6 27 1D            [ 1]  512 	jreq	00112$
+                                    513 ;	source/FWLIB/src/stm8s_clk.c: 470: CLK->SWCR |= CLK_SWCR_SWIEN;
+      0001F8 72 14 50 C5      [ 1]  514 	bset	20677, #2
+                                    515 ;	source/FWLIB/src/stm8s_clk.c: 471: break;
+      0001FC 20 17            [ 2]  516 	jra	00112$
+                                    517 ;	source/FWLIB/src/stm8s_clk.c: 472: case CLK_IT_CSSD: /* Enable the clock security system detection interrupt */
+      0001FE                        518 00102$:
+                                    519 ;	source/FWLIB/src/stm8s_clk.c: 473: CLK->CSSR |= CLK_CSSR_CSSDIE;
+      0001FE 72 14 50 C8      [ 1]  520 	bset	20680, #2
+                                    521 ;	source/FWLIB/src/stm8s_clk.c: 474: break;
+      000202 20 11            [ 2]  522 	jra	00112$
+                                    523 ;	source/FWLIB/src/stm8s_clk.c: 477: }
+      000204                        524 00110$:
+                                    525 ;	source/FWLIB/src/stm8s_clk.c: 481: switch (CLK_IT)
+      000204 0D 01            [ 1]  526 	tnz	(0x01, sp)
+      000206 26 09            [ 1]  527 	jrne	00106$
+      000208 4D               [ 1]  528 	tnz	a
+      000209 27 0A            [ 1]  529 	jreq	00112$
+                                    530 ;	source/FWLIB/src/stm8s_clk.c: 484: CLK->SWCR  &= (uint8_t)(~CLK_SWCR_SWIEN);
+      00020B 72 15 50 C5      [ 1]  531 	bres	20677, #2
+                                    532 ;	source/FWLIB/src/stm8s_clk.c: 485: break;
+      00020F 20 04            [ 2]  533 	jra	00112$
+                                    534 ;	source/FWLIB/src/stm8s_clk.c: 486: case CLK_IT_CSSD: /* Disable the clock security system detection interrupt */
+      000211                        535 00106$:
+                                    536 ;	source/FWLIB/src/stm8s_clk.c: 487: CLK->CSSR &= (uint8_t)(~CLK_CSSR_CSSDIE);
+      000211 72 15 50 C8      [ 1]  537 	bres	20680, #2
+                                    538 ;	source/FWLIB/src/stm8s_clk.c: 491: }
+      000215                        539 00112$:
+                                    540 ;	source/FWLIB/src/stm8s_clk.c: 493: }
+      000215 84               [ 1]  541 	pop	a
+      000216 81               [ 4]  542 	ret
+                                    543 ;	source/FWLIB/src/stm8s_clk.c: 500: void CLK_SYSCLKConfig(CLK_Prescaler_TypeDef CLK_Prescaler)
+                                    544 ;	-----------------------------------------
+                                    545 ;	 function CLK_SYSCLKConfig
+                                    546 ;	-----------------------------------------
+      000217                        547 _CLK_SYSCLKConfig:
+      000217 88               [ 1]  548 	push	a
+                                    549 ;	source/FWLIB/src/stm8s_clk.c: 507: CLK->CKDIVR &= (uint8_t)(~CLK_CKDIVR_HSIDIV);
+      000218 C6 50 C6         [ 1]  550 	ld	a, 0x50c6
+                                    551 ;	source/FWLIB/src/stm8s_clk.c: 505: if (((uint8_t)CLK_Prescaler & (uint8_t)0x80) == 0x00) /* Bit7 = 0 means HSI divider */
+      00021B 0D 04            [ 1]  552 	tnz	(0x04, sp)
+      00021D 2B 15            [ 1]  553 	jrmi	00102$
+                                    554 ;	source/FWLIB/src/stm8s_clk.c: 507: CLK->CKDIVR &= (uint8_t)(~CLK_CKDIVR_HSIDIV);
+      00021F A4 E7            [ 1]  555 	and	a, #0xe7
+      000221 C7 50 C6         [ 1]  556 	ld	0x50c6, a
+                                    557 ;	source/FWLIB/src/stm8s_clk.c: 508: CLK->CKDIVR |= (uint8_t)((uint8_t)CLK_Prescaler & (uint8_t)CLK_CKDIVR_HSIDIV);
+      000224 C6 50 C6         [ 1]  558 	ld	a, 0x50c6
+      000227 6B 01            [ 1]  559 	ld	(0x01, sp), a
+      000229 7B 04            [ 1]  560 	ld	a, (0x04, sp)
+      00022B A4 18            [ 1]  561 	and	a, #0x18
+      00022D 1A 01            [ 1]  562 	or	a, (0x01, sp)
+      00022F C7 50 C6         [ 1]  563 	ld	0x50c6, a
+      000232 20 13            [ 2]  564 	jra	00104$
+      000234                        565 00102$:
+                                    566 ;	source/FWLIB/src/stm8s_clk.c: 512: CLK->CKDIVR &= (uint8_t)(~CLK_CKDIVR_CPUDIV);
+      000234 A4 F8            [ 1]  567 	and	a, #0xf8
+      000236 C7 50 C6         [ 1]  568 	ld	0x50c6, a
+                                    569 ;	source/FWLIB/src/stm8s_clk.c: 513: CLK->CKDIVR |= (uint8_t)((uint8_t)CLK_Prescaler & (uint8_t)CLK_CKDIVR_CPUDIV);
+      000239 C6 50 C6         [ 1]  570 	ld	a, 0x50c6
+      00023C 6B 01            [ 1]  571 	ld	(0x01, sp), a
+      00023E 7B 04            [ 1]  572 	ld	a, (0x04, sp)
+      000240 A4 07            [ 1]  573 	and	a, #0x07
+      000242 1A 01            [ 1]  574 	or	a, (0x01, sp)
+      000244 C7 50 C6         [ 1]  575 	ld	0x50c6, a
+      000247                        576 00104$:
+                                    577 ;	source/FWLIB/src/stm8s_clk.c: 515: }
+      000247 84               [ 1]  578 	pop	a
+      000248 81               [ 4]  579 	ret
+                                    580 ;	source/FWLIB/src/stm8s_clk.c: 523: void CLK_SWIMConfig(CLK_SWIMDivider_TypeDef CLK_SWIMDivider)
+                                    581 ;	-----------------------------------------
+                                    582 ;	 function CLK_SWIMConfig
+                                    583 ;	-----------------------------------------
+      000249                        584 _CLK_SWIMConfig:
+                                    585 ;	source/FWLIB/src/stm8s_clk.c: 531: CLK->SWIMCCR |= CLK_SWIMCCR_SWIMDIV;
+      000249 C6 50 CD         [ 1]  586 	ld	a, 0x50cd
+                                    587 ;	source/FWLIB/src/stm8s_clk.c: 528: if (CLK_SWIMDivider != CLK_SWIMDIVIDER_2)
+      00024C 0D 03            [ 1]  588 	tnz	(0x03, sp)
+      00024E 27 06            [ 1]  589 	jreq	00102$
+                                    590 ;	source/FWLIB/src/stm8s_clk.c: 531: CLK->SWIMCCR |= CLK_SWIMCCR_SWIMDIV;
+      000250 AA 01            [ 1]  591 	or	a, #0x01
+      000252 C7 50 CD         [ 1]  592 	ld	0x50cd, a
+      000255 81               [ 4]  593 	ret
+      000256                        594 00102$:
+                                    595 ;	source/FWLIB/src/stm8s_clk.c: 536: CLK->SWIMCCR &= (uint8_t)(~CLK_SWIMCCR_SWIMDIV);
+      000256 A4 FE            [ 1]  596 	and	a, #0xfe
+      000258 C7 50 CD         [ 1]  597 	ld	0x50cd, a
+                                    598 ;	source/FWLIB/src/stm8s_clk.c: 538: }
+      00025B 81               [ 4]  599 	ret
+                                    600 ;	source/FWLIB/src/stm8s_clk.c: 547: void CLK_ClockSecuritySystemEnable(void)
+                                    601 ;	-----------------------------------------
+                                    602 ;	 function CLK_ClockSecuritySystemEnable
+                                    603 ;	-----------------------------------------
+      00025C                        604 _CLK_ClockSecuritySystemEnable:
+                                    605 ;	source/FWLIB/src/stm8s_clk.c: 550: CLK->CSSR |= CLK_CSSR_CSSEN;
+      00025C 72 10 50 C8      [ 1]  606 	bset	20680, #0
+                                    607 ;	source/FWLIB/src/stm8s_clk.c: 551: }
+      000260 81               [ 4]  608 	ret
+                                    609 ;	source/FWLIB/src/stm8s_clk.c: 559: CLK_Source_TypeDef CLK_GetSYSCLKSource(void)
+                                    610 ;	-----------------------------------------
+                                    611 ;	 function CLK_GetSYSCLKSource
+                                    612 ;	-----------------------------------------
+      000261                        613 _CLK_GetSYSCLKSource:
+                                    614 ;	source/FWLIB/src/stm8s_clk.c: 561: return((CLK_Source_TypeDef)CLK->CMSR);
+      000261 C6 50 C3         [ 1]  615 	ld	a, 0x50c3
+                                    616 ;	source/FWLIB/src/stm8s_clk.c: 562: }
+      000264 81               [ 4]  617 	ret
+                                    618 ;	source/FWLIB/src/stm8s_clk.c: 569: uint32_t CLK_GetClockFreq(void)
+                                    619 ;	-----------------------------------------
+                                    620 ;	 function CLK_GetClockFreq
+                                    621 ;	-----------------------------------------
+      000265                        622 _CLK_GetClockFreq:
+      000265 52 04            [ 2]  623 	sub	sp, #4
+                                    624 ;	source/FWLIB/src/stm8s_clk.c: 576: clocksource = (CLK_Source_TypeDef)CLK->CMSR;
+      000267 C6 50 C3         [ 1]  625 	ld	a, 0x50c3
+                                    626 ;	source/FWLIB/src/stm8s_clk.c: 578: if (clocksource == CLK_SOURCE_HSI)
+      00026A 6B 04            [ 1]  627 	ld	(0x04, sp), a
+      00026C A1 E1            [ 1]  628 	cp	a, #0xe1
+      00026E 26 26            [ 1]  629 	jrne	00105$
+                                    630 ;	source/FWLIB/src/stm8s_clk.c: 580: tmp = (uint8_t)(CLK->CKDIVR & CLK_CKDIVR_HSIDIV);
+      000270 C6 50 C6         [ 1]  631 	ld	a, 0x50c6
+      000273 A4 18            [ 1]  632 	and	a, #0x18
+                                    633 ;	source/FWLIB/src/stm8s_clk.c: 581: tmp = (uint8_t)(tmp >> 3);
+      000275 44               [ 1]  634 	srl	a
+      000276 44               [ 1]  635 	srl	a
+      000277 44               [ 1]  636 	srl	a
+                                    637 ;	source/FWLIB/src/stm8s_clk.c: 582: presc = HSIDivFactor[tmp];
+      000278 5F               [ 1]  638 	clrw	x
+      000279 97               [ 1]  639 	ld	xl, a
+      00027A 1Cr00r00         [ 2]  640 	addw	x, #(_HSIDivFactor + 0)
+      00027D F6               [ 1]  641 	ld	a, (x)
+                                    642 ;	source/FWLIB/src/stm8s_clk.c: 583: clockfrequency = HSI_VALUE / presc;
+      00027E 5F               [ 1]  643 	clrw	x
+      00027F 97               [ 1]  644 	ld	xl, a
+      000280 90 5F            [ 1]  645 	clrw	y
+      000282 89               [ 2]  646 	pushw	x
+      000283 90 89            [ 2]  647 	pushw	y
+      000285 4B 00            [ 1]  648 	push	#0x00
+      000287 4B 24            [ 1]  649 	push	#0x24
+      000289 4B F4            [ 1]  650 	push	#0xf4
+      00028B 4B 00            [ 1]  651 	push	#0x00
+      00028D CDr00r00         [ 4]  652 	call	__divulong
+      000290 5B 08            [ 2]  653 	addw	sp, #8
+      000292 1F 03            [ 2]  654 	ldw	(0x03, sp), x
+      000294 20 1A            [ 2]  655 	jra	00106$
+      000296                        656 00105$:
+                                    657 ;	source/FWLIB/src/stm8s_clk.c: 585: else if ( clocksource == CLK_SOURCE_LSI)
+      000296 7B 04            [ 1]  658 	ld	a, (0x04, sp)
+      000298 A1 D2            [ 1]  659 	cp	a, #0xd2
+      00029A 26 0B            [ 1]  660 	jrne	00102$
+                                    661 ;	source/FWLIB/src/stm8s_clk.c: 587: clockfrequency = LSI_VALUE;
+      00029C AE F4 00         [ 2]  662 	ldw	x, #0xf400
+      00029F 1F 03            [ 2]  663 	ldw	(0x03, sp), x
+      0002A1 90 AE 00 01      [ 2]  664 	ldw	y, #0x0001
+      0002A5 20 09            [ 2]  665 	jra	00106$
+      0002A7                        666 00102$:
+                                    667 ;	source/FWLIB/src/stm8s_clk.c: 591: clockfrequency = HSE_VALUE;
+      0002A7 AE 24 00         [ 2]  668 	ldw	x, #0x2400
+      0002AA 1F 03            [ 2]  669 	ldw	(0x03, sp), x
+      0002AC 90 AE 00 F4      [ 2]  670 	ldw	y, #0x00f4
+      0002B0                        671 00106$:
+                                    672 ;	source/FWLIB/src/stm8s_clk.c: 594: return((uint32_t)clockfrequency);
+      0002B0 1E 03            [ 2]  673 	ldw	x, (0x03, sp)
+                                    674 ;	source/FWLIB/src/stm8s_clk.c: 595: }
+      0002B2 5B 04            [ 2]  675 	addw	sp, #4
+      0002B4 81               [ 4]  676 	ret
+                                    677 ;	source/FWLIB/src/stm8s_clk.c: 604: void CLK_AdjustHSICalibrationValue(CLK_HSITrimValue_TypeDef CLK_HSICalibrationValue)
+                                    678 ;	-----------------------------------------
+                                    679 ;	 function CLK_AdjustHSICalibrationValue
+                                    680 ;	-----------------------------------------
+      0002B5                        681 _CLK_AdjustHSICalibrationValue:
+                                    682 ;	source/FWLIB/src/stm8s_clk.c: 610: CLK->HSITRIMR = (uint8_t)( (uint8_t)(CLK->HSITRIMR & (uint8_t)(~CLK_HSITRIMR_HSITRIM))|((uint8_t)CLK_HSICalibrationValue));
+      0002B5 C6 50 CC         [ 1]  683 	ld	a, 0x50cc
+      0002B8 A4 F8            [ 1]  684 	and	a, #0xf8
+      0002BA 1A 03            [ 1]  685 	or	a, (0x03, sp)
+      0002BC C7 50 CC         [ 1]  686 	ld	0x50cc, a
+                                    687 ;	source/FWLIB/src/stm8s_clk.c: 611: }
+      0002BF 81               [ 4]  688 	ret
+                                    689 ;	source/FWLIB/src/stm8s_clk.c: 622: void CLK_SYSCLKEmergencyClear(void)
+                                    690 ;	-----------------------------------------
+                                    691 ;	 function CLK_SYSCLKEmergencyClear
+                                    692 ;	-----------------------------------------
+      0002C0                        693 _CLK_SYSCLKEmergencyClear:
+                                    694 ;	source/FWLIB/src/stm8s_clk.c: 624: CLK->SWCR &= (uint8_t)(~CLK_SWCR_SWBSY);
+      0002C0 72 11 50 C5      [ 1]  695 	bres	20677, #0
+                                    696 ;	source/FWLIB/src/stm8s_clk.c: 625: }
+      0002C4 81               [ 4]  697 	ret
+                                    698 ;	source/FWLIB/src/stm8s_clk.c: 634: FlagStatus CLK_GetFlagStatus(CLK_Flag_TypeDef CLK_FLAG)
+                                    699 ;	-----------------------------------------
+                                    700 ;	 function CLK_GetFlagStatus
+                                    701 ;	-----------------------------------------
+      0002C5                        702 _CLK_GetFlagStatus:
+      0002C5 52 02            [ 2]  703 	sub	sp, #2
+                                    704 ;	source/FWLIB/src/stm8s_clk.c: 644: statusreg = (uint16_t)((uint16_t)CLK_FLAG & (uint16_t)0xFF00);
+      0002C7 1E 05            [ 2]  705 	ldw	x, (0x05, sp)
+      0002C9 4F               [ 1]  706 	clr	a
+      0002CA 97               [ 1]  707 	ld	xl, a
+                                    708 ;	source/FWLIB/src/stm8s_clk.c: 647: if (statusreg == 0x0100) /* The flag to check is in ICKRregister */
+      0002CB 1F 01            [ 2]  709 	ldw	(0x01, sp), x
+      0002CD A3 01 00         [ 2]  710 	cpw	x, #0x0100
+      0002D0 26 05            [ 1]  711 	jrne	00111$
+                                    712 ;	source/FWLIB/src/stm8s_clk.c: 649: tmpreg = CLK->ICKR;
+      0002D2 C6 50 C0         [ 1]  713 	ld	a, 0x50c0
+      0002D5 20 27            [ 2]  714 	jra	00112$
+      0002D7                        715 00111$:
+                                    716 ;	source/FWLIB/src/stm8s_clk.c: 651: else if (statusreg == 0x0200) /* The flag to check is in ECKRregister */
+      0002D7 1E 01            [ 2]  717 	ldw	x, (0x01, sp)
+      0002D9 A3 02 00         [ 2]  718 	cpw	x, #0x0200
+      0002DC 26 05            [ 1]  719 	jrne	00108$
+                                    720 ;	source/FWLIB/src/stm8s_clk.c: 653: tmpreg = CLK->ECKR;
+      0002DE C6 50 C1         [ 1]  721 	ld	a, 0x50c1
+      0002E1 20 1B            [ 2]  722 	jra	00112$
+      0002E3                        723 00108$:
+                                    724 ;	source/FWLIB/src/stm8s_clk.c: 655: else if (statusreg == 0x0300) /* The flag to check is in SWIC register */
+      0002E3 1E 01            [ 2]  725 	ldw	x, (0x01, sp)
+      0002E5 A3 03 00         [ 2]  726 	cpw	x, #0x0300
+      0002E8 26 05            [ 1]  727 	jrne	00105$
+                                    728 ;	source/FWLIB/src/stm8s_clk.c: 657: tmpreg = CLK->SWCR;
+      0002EA C6 50 C5         [ 1]  729 	ld	a, 0x50c5
+      0002ED 20 0F            [ 2]  730 	jra	00112$
+      0002EF                        731 00105$:
+                                    732 ;	source/FWLIB/src/stm8s_clk.c: 659: else if (statusreg == 0x0400) /* The flag to check is in CSS register */
+      0002EF 1E 01            [ 2]  733 	ldw	x, (0x01, sp)
+      0002F1 A3 04 00         [ 2]  734 	cpw	x, #0x0400
+      0002F4 26 05            [ 1]  735 	jrne	00102$
+                                    736 ;	source/FWLIB/src/stm8s_clk.c: 661: tmpreg = CLK->CSSR;
+      0002F6 C6 50 C8         [ 1]  737 	ld	a, 0x50c8
+      0002F9 20 03            [ 2]  738 	jra	00112$
+      0002FB                        739 00102$:
+                                    740 ;	source/FWLIB/src/stm8s_clk.c: 665: tmpreg = CLK->CCOR;
+      0002FB C6 50 C9         [ 1]  741 	ld	a, 0x50c9
+      0002FE                        742 00112$:
+                                    743 ;	source/FWLIB/src/stm8s_clk.c: 668: if ((tmpreg & (uint8_t)CLK_FLAG) != (uint8_t)RESET)
+      0002FE 88               [ 1]  744 	push	a
+      0002FF 7B 07            [ 1]  745 	ld	a, (0x07, sp)
+      000301 6B 03            [ 1]  746 	ld	(0x03, sp), a
+      000303 84               [ 1]  747 	pop	a
+      000304 14 02            [ 1]  748 	and	a, (0x02, sp)
+      000306 27 03            [ 1]  749 	jreq	00114$
+                                    750 ;	source/FWLIB/src/stm8s_clk.c: 670: bitstatus = SET;
+      000308 A6 01            [ 1]  751 	ld	a, #0x01
+                                    752 ;	source/FWLIB/src/stm8s_clk.c: 674: bitstatus = RESET;
+      00030A 21                     753 	.byte 0x21
+      00030B                        754 00114$:
+      00030B 4F               [ 1]  755 	clr	a
+      00030C                        756 00115$:
+                                    757 ;	source/FWLIB/src/stm8s_clk.c: 678: return((FlagStatus)bitstatus);
+                                    758 ;	source/FWLIB/src/stm8s_clk.c: 679: }
+      00030C 5B 02            [ 2]  759 	addw	sp, #2
+      00030E 81               [ 4]  760 	ret
+                                    761 ;	source/FWLIB/src/stm8s_clk.c: 687: ITStatus CLK_GetITStatus(CLK_IT_TypeDef CLK_IT)
+                                    762 ;	-----------------------------------------
+                                    763 ;	 function CLK_GetITStatus
+                                    764 ;	-----------------------------------------
+      00030F                        765 _CLK_GetITStatus:
+                                    766 ;	source/FWLIB/src/stm8s_clk.c: 694: if (CLK_IT == CLK_IT_SWIF)
+      00030F 7B 03            [ 1]  767 	ld	a, (0x03, sp)
+      000311 A1 1C            [ 1]  768 	cp	a, #0x1c
+      000313 26 0D            [ 1]  769 	jrne	00108$
+                                    770 ;	source/FWLIB/src/stm8s_clk.c: 697: if ((CLK->SWCR & (uint8_t)CLK_IT) == (uint8_t)0x0C)
+      000315 C6 50 C5         [ 1]  771 	ld	a, 0x50c5
+      000318 14 03            [ 1]  772 	and	a, (0x03, sp)
+                                    773 ;	source/FWLIB/src/stm8s_clk.c: 699: bitstatus = SET;
+      00031A A0 0C            [ 1]  774 	sub	a, #0x0c
+      00031C 26 02            [ 1]  775 	jrne	00102$
+      00031E 4C               [ 1]  776 	inc	a
+      00031F 81               [ 4]  777 	ret
+      000320                        778 00102$:
+                                    779 ;	source/FWLIB/src/stm8s_clk.c: 703: bitstatus = RESET;
+      000320 4F               [ 1]  780 	clr	a
+      000321 81               [ 4]  781 	ret
+      000322                        782 00108$:
+                                    783 ;	source/FWLIB/src/stm8s_clk.c: 709: if ((CLK->CSSR & (uint8_t)CLK_IT) == (uint8_t)0x0C)
+      000322 C6 50 C8         [ 1]  784 	ld	a, 0x50c8
+      000325 14 03            [ 1]  785 	and	a, (0x03, sp)
+                                    786 ;	source/FWLIB/src/stm8s_clk.c: 711: bitstatus = SET;
+      000327 A0 0C            [ 1]  787 	sub	a, #0x0c
+      000329 26 02            [ 1]  788 	jrne	00105$
+      00032B 4C               [ 1]  789 	inc	a
+      00032C 81               [ 4]  790 	ret
+      00032D                        791 00105$:
+                                    792 ;	source/FWLIB/src/stm8s_clk.c: 715: bitstatus = RESET;
+      00032D 4F               [ 1]  793 	clr	a
+                                    794 ;	source/FWLIB/src/stm8s_clk.c: 720: return bitstatus;
+                                    795 ;	source/FWLIB/src/stm8s_clk.c: 721: }
+      00032E 81               [ 4]  796 	ret
+                                    797 ;	source/FWLIB/src/stm8s_clk.c: 729: void CLK_ClearITPendingBit(CLK_IT_TypeDef CLK_IT)
+                                    798 ;	-----------------------------------------
+                                    799 ;	 function CLK_ClearITPendingBit
+                                    800 ;	-----------------------------------------
+      00032F                        801 _CLK_ClearITPendingBit:
+                                    802 ;	source/FWLIB/src/stm8s_clk.c: 734: if (CLK_IT == (uint8_t)CLK_IT_CSSD)
+      00032F 7B 03            [ 1]  803 	ld	a, (0x03, sp)
+      000331 A1 0C            [ 1]  804 	cp	a, #0x0c
+      000333 26 05            [ 1]  805 	jrne	00102$
+                                    806 ;	source/FWLIB/src/stm8s_clk.c: 737: CLK->CSSR &= (uint8_t)(~CLK_CSSR_CSSD);
+      000335 72 17 50 C8      [ 1]  807 	bres	20680, #3
+      000339 81               [ 4]  808 	ret
+      00033A                        809 00102$:
+                                    810 ;	source/FWLIB/src/stm8s_clk.c: 742: CLK->SWCR &= (uint8_t)(~CLK_SWCR_SWIF);
+      00033A 72 17 50 C5      [ 1]  811 	bres	20677, #3
+                                    812 ;	source/FWLIB/src/stm8s_clk.c: 745: }
+      00033E 81               [ 4]  813 	ret
+                                    814 	.area CODE
+                                    815 	.area CONST
+      000000                        816 _HSIDivFactor:
+      000000 01                     817 	.db #0x01	; 1
+      000001 02                     818 	.db #0x02	; 2
+      000002 04                     819 	.db #0x04	; 4
+      000003 08                     820 	.db #0x08	; 8
+      000004                        821 _CLKPrescTable:
+      000004 01                     822 	.db #0x01	; 1
+      000005 02                     823 	.db #0x02	; 2
+      000006 04                     824 	.db #0x04	; 4
+      000007 08                     825 	.db #0x08	; 8
+      000008 0A                     826 	.db #0x0a	; 10
+      000009 10                     827 	.db #0x10	; 16
+      00000A 14                     828 	.db #0x14	; 20
+      00000B 28                     829 	.db #0x28	; 40
+                                    830 	.area INITIALIZER
+                                    831 	.area CABS (ABS)
