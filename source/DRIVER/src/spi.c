@@ -3,7 +3,7 @@
 /**
  * @brief   初始化SPI
  **/
-void SPI_Init(void)
+void SPI1_Init(void)
 {
 
 }

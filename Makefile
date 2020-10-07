@@ -34,25 +34,30 @@ C_INCLUDES = \
 
 CFLAGS = $(CPU) $(C_DEFS) $(C_INCLUDES)
 
-$(BUILD_DIR)/%.rel: %.c
-	$(CC) -c $(CFLAGS) $< -o $@
-
 #######################################
 # 开始编译
 #######################################
-STDPERIPH_OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(STDPERIPH_C_SOURCES:.c=.o)))
-DEVICE_OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(DEVICE_C_SOURCES:.c=.o)))
-DRIVER_OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(DRIVER_C_SOURCES:.c=.o)))
-USER_OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(USER_C_SOURCES:.c=.o)))
+STDPERIPH_OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(STDPERIPH_C_SOURCES:.c=.rel)))
+DEVICE_OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(DEVICE_C_SOURCES:.c=.rel)))
+DRIVER_OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(DRIVER_C_SOURCES:.c=.rel)))
+USER_OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(USER_C_SOURCES:.c=.rel)))
 
-OBJECTS = $(STDPERIPH_OBJECTS) $(DEVICE_OBJECTS) $(DRIVER_OBJECTS) $(USER_OBJECTS)
+OBJECTS = $(USER_OBJECTS) $(STDPERIPH_OBJECTS) $(DEVICE_OBJECTS) $(DRIVER_OBJECTS) 
 
 .PHONY: all \
-stdperiph
+stdperiph device driver user \
+$(BUILD_DIR)/main.ihx
 
-# all: stdperiph device driver user
+all: stdperiph device driver user $(BUILD_DIR)/main.ihx
 
-$(BUILD_DIR)/%.o: %.c
+$(BUILD_DIR)/main.ihx: $(OBJECTS)
+	$(CC) $(CFLAGS) $^ -o $@
+
+
+# build/main.ihx: source/USER/main.c build/stm8s_gpio.rel
+# 	sdcc -mstm8 $(C_DEFS) -Isource/FWLIB/inc -Isource/USER source/USER/main.c build/stm8s_gpio.rel 
+
+$(BUILD_DIR)/%.rel: %.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
 vpath %.c $(sort $(dir $(STDPERIPH_C_SOURCES)))
@@ -60,20 +65,23 @@ vpath %.c $(sort $(dir $(STDPERIPH_C_SOURCES)))
 stdperiph: $(STDPERIPH_OBJECTS)
 	@echo \<\<\<\<\<Standard Peripheral Library Compile Completely\>\>\>\>\>
 
-# build/stm8s_gpio.rel: source/FWLIB/src/stm8s_gpio.c
-# 	sdcc -mstm8 $(C_DEFS) -Isource/FWLIB/inc -Isource/USER -c source/FWLIB/src/stm8s_gpio.c -o build/stm8s_gpio.rel
+vpath %.c $(sort $(dir $(DEVICE_C_SOURCES)))
 
-# build/stm8s_clk.rel: source/FWLIB/src/stm8s_clk.c
-# 	sdcc -mstm8 $(C_DEFS) -Isource/FWLIB/inc -Isource/USER -c source/FWLIB/src/stm8s_clk.c -o build/stm8s_clk.rel 
+device: $(DEVICE_OBJECTS)
+	@echo \<\<\<\<\<Device Compile Completely\>\>\>\>\>
 
-# build/main.ihx: source/USER/main.c build/stm8s_gpio.rel
-# 	sdcc -mstm8 $(C_DEFS) -Isource/FWLIB/inc -Isource/USER source/USER/main.c build/stm8s_gpio.rel -o build/main.ihx 
+vpath %.c $(sort $(dir $(DRIVER_C_SOURCES)))
 
-# gpio: build/stm8s_gpio.rel
+driver: $(DRIVER_OBJECTS)
+	@echo \<\<\<\<\<Driver Compile Completely\>\>\>\>\>
 
-# clk: build/stm8s_clk.rel
+vpath %.c $(sort $(dir $(USER_C_SOURCES)))
 
-# main: build/main.ihx
+user: $(USER_OBJECTS)
+	@echo \<\<\<\<\<User File Compile Completely\>\>\>\>\>
+
+
+
 
 
 burn:

@@ -66,7 +66,7 @@
       008013 AE 00 00         [ 2]   66 	ldw	x, #l_INITIALIZER
       008016 27 09            [ 1]   67 	jreq	00004$
       008018                         68 00003$:
-      008018 D6 80 23         [ 1]   69 	ld	a, (s_INITIALIZER - 1, x)
+      008018 D6 80 51         [ 1]   69 	ld	a, (s_INITIALIZER - 1, x)
       00801B D7 00 00         [ 1]   70 	ld	(s_INITIALIZED - 1, x), a
       00801E 5A               [ 2]   71 	decw	x
       00801F 26 F7            [ 1]   72 	jrne	00003$
@@ -80,57 +80,57 @@
                                      80 	.area HOME
                                      81 	.area HOME
       008004                         82 __sdcc_program_startup:
-      008004 CC 80 24         [ 2]   83 	jp	_main
+      008004 CC 80 52         [ 2]   83 	jp	_main
                                      84 ;	return from main will return to caller
                                      85 ;--------------------------------------------------------
                                      86 ; code
                                      87 ;--------------------------------------------------------
                                      88 	.area CODE
-                                     89 ;	source/USER/main.c: 103: void main()
+                                     89 ;	source/USER/main.c: 3: void main()
                                      90 ;	-----------------------------------------
                                      91 ;	 function main
                                      92 ;	-----------------------------------------
-      008024                         93 _main:
-                                     94 ;	source/USER/main.c: 117: GPIO_Init(GPIOB,GPIO_PIN_5,GPIO_MODE_OUT_PP_LOW_FAST);
-      008024 4B E0            [ 1]   95 	push	#0xe0
-      008026 4B 20            [ 1]   96 	push	#0x20
-      008028 4B 05            [ 1]   97 	push	#0x05
-      00802A 4B 50            [ 1]   98 	push	#0x50
-      00802C CD 80 68         [ 4]   99 	call	_GPIO_Init
-      00802F 5B 04            [ 2]  100 	addw	sp, #4
-                                    101 ;	source/USER/main.c: 118: GPIO_WriteHigh(GPIOB,GPIO_PIN_5);
-      008031 4B 20            [ 1]  102 	push	#0x20
-      008033 4B 05            [ 1]  103 	push	#0x05
-      008035 4B 50            [ 1]  104 	push	#0x50
-      008037 CD 80 E3         [ 4]  105 	call	_GPIO_WriteHigh
-      00803A 5B 03            [ 2]  106 	addw	sp, #3
-                                    107 ;	source/USER/main.c: 120: while(1)
-      00803C                        108 00104$:
-                                    109 ;	source/USER/main.c: 122: GPIO_WriteReverse(GPIOB,GPIO_PIN_5);
-      00803C 4B 20            [ 1]  110 	push	#0x20
-      00803E 4B 05            [ 1]  111 	push	#0x05
-      008040 4B 50            [ 1]  112 	push	#0x50
-      008042 CD 80 F8         [ 4]  113 	call	_GPIO_WriteReverse
-      008045 5B 03            [ 2]  114 	addw	sp, #3
-                                    115 ;	source/USER/main.c: 123: for(char i=0;i<200;i++)
-      008047 5F               [ 1]  116 	clrw	x
-      008048                        117 00110$:
-      008048 9F               [ 1]  118 	ld	a, xl
-      008049 A1 C8            [ 1]  119 	cp	a, #0xc8
-      00804B 24 EF            [ 1]  120 	jrnc	00104$
-                                    121 ;	source/USER/main.c: 125: for(char j=0;j<200;j++);
-      00804D 4F               [ 1]  122 	clr	a
-      00804E                        123 00107$:
-      00804E A1 C8            [ 1]  124 	cp	a, #0xc8
-      008050 24 03            [ 1]  125 	jrnc	00111$
-      008052 4C               [ 1]  126 	inc	a
-      008053 20 F9            [ 2]  127 	jra	00107$
-      008055                        128 00111$:
-                                    129 ;	source/USER/main.c: 123: for(char i=0;i<200;i++)
-      008055 5C               [ 1]  130 	incw	x
-      008056 20 F0            [ 2]  131 	jra	00110$
-                                    132 ;	source/USER/main.c: 129: }
-      008058 81               [ 4]  133 	ret
+      008052                         93 _main:
+                                     94 ;	source/USER/main.c: 5: GPIO_Init(GPIOB,GPIO_PIN_5,GPIO_MODE_OUT_PP_LOW_FAST);
+      008052 4B E0            [ 1]   95 	push	#0xe0
+      008054 4B 20            [ 1]   96 	push	#0x20
+      008056 4B 05            [ 1]   97 	push	#0x05
+      008058 4B 50            [ 1]   98 	push	#0x50
+      00805A CD 8C D0         [ 4]   99 	call	_GPIO_Init
+      00805D 5B 04            [ 2]  100 	addw	sp, #4
+                                    101 ;	source/USER/main.c: 6: GPIO_WriteHigh(GPIOB,GPIO_PIN_5);
+      00805F 4B 20            [ 1]  102 	push	#0x20
+      008061 4B 05            [ 1]  103 	push	#0x05
+      008063 4B 50            [ 1]  104 	push	#0x50
+      008065 CD 8D 4B         [ 4]  105 	call	_GPIO_WriteHigh
+      008068 5B 03            [ 2]  106 	addw	sp, #3
+                                    107 ;	source/USER/main.c: 8: while(1)
+      00806A                        108 00104$:
+                                    109 ;	source/USER/main.c: 10: GPIO_WriteReverse(GPIOB,GPIO_PIN_5);
+      00806A 4B 20            [ 1]  110 	push	#0x20
+      00806C 4B 05            [ 1]  111 	push	#0x05
+      00806E 4B 50            [ 1]  112 	push	#0x50
+      008070 CD 8D 60         [ 4]  113 	call	_GPIO_WriteReverse
+      008073 5B 03            [ 2]  114 	addw	sp, #3
+                                    115 ;	source/USER/main.c: 11: for(char i=0;i<200;i++)
+      008075 5F               [ 1]  116 	clrw	x
+      008076                        117 00110$:
+      008076 9F               [ 1]  118 	ld	a, xl
+      008077 A1 C8            [ 1]  119 	cp	a, #0xc8
+      008079 24 EF            [ 1]  120 	jrnc	00104$
+                                    121 ;	source/USER/main.c: 13: for(char j=0;j<200;j++);
+      00807B 4F               [ 1]  122 	clr	a
+      00807C                        123 00107$:
+      00807C A1 C8            [ 1]  124 	cp	a, #0xc8
+      00807E 24 03            [ 1]  125 	jrnc	00111$
+      008080 4C               [ 1]  126 	inc	a
+      008081 20 F9            [ 2]  127 	jra	00107$
+      008083                        128 00111$:
+                                    129 ;	source/USER/main.c: 11: for(char i=0;i<200;i++)
+      008083 5C               [ 1]  130 	incw	x
+      008084 20 F0            [ 2]  131 	jra	00110$
+                                    132 ;	source/USER/main.c: 17: }
+      008086 81               [ 4]  133 	ret
                                     134 	.area CODE
                                     135 	.area CONST
                                     136 	.area INITIALIZER

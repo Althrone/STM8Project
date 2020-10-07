@@ -86,39 +86,39 @@ __sdcc_program_startup:
 ; code
 ;--------------------------------------------------------
 	.area CODE
-;	source/USER/main.c: 103: void main()
+;	source/USER/main.c: 3: void main()
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-;	source/USER/main.c: 117: GPIO_Init(GPIOB,GPIO_PIN_5,GPIO_MODE_OUT_PP_LOW_FAST);
+;	source/USER/main.c: 5: GPIO_Init(GPIOB,GPIO_PIN_5,GPIO_MODE_OUT_PP_LOW_FAST);
 	push	#0xe0
 	push	#0x20
 	push	#0x05
 	push	#0x50
 	call	_GPIO_Init
 	addw	sp, #4
-;	source/USER/main.c: 118: GPIO_WriteHigh(GPIOB,GPIO_PIN_5);
+;	source/USER/main.c: 6: GPIO_WriteHigh(GPIOB,GPIO_PIN_5);
 	push	#0x20
 	push	#0x05
 	push	#0x50
 	call	_GPIO_WriteHigh
 	addw	sp, #3
-;	source/USER/main.c: 120: while(1)
+;	source/USER/main.c: 8: while(1)
 00104$:
-;	source/USER/main.c: 122: GPIO_WriteReverse(GPIOB,GPIO_PIN_5);
+;	source/USER/main.c: 10: GPIO_WriteReverse(GPIOB,GPIO_PIN_5);
 	push	#0x20
 	push	#0x05
 	push	#0x50
 	call	_GPIO_WriteReverse
 	addw	sp, #3
-;	source/USER/main.c: 123: for(char i=0;i<200;i++)
+;	source/USER/main.c: 11: for(char i=0;i<200;i++)
 	clrw	x
 00110$:
 	ld	a, xl
 	cp	a, #0xc8
 	jrnc	00104$
-;	source/USER/main.c: 125: for(char j=0;j<200;j++);
+;	source/USER/main.c: 13: for(char j=0;j<200;j++);
 	clr	a
 00107$:
 	cp	a, #0xc8
@@ -126,10 +126,10 @@ _main:
 	inc	a
 	jra	00107$
 00111$:
-;	source/USER/main.c: 123: for(char i=0;i<200;i++)
+;	source/USER/main.c: 11: for(char i=0;i<200;i++)
 	incw	x
 	jra	00110$
-;	source/USER/main.c: 129: }
+;	source/USER/main.c: 17: }
 	ret
 	.area CODE
 	.area CONST
