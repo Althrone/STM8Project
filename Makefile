@@ -24,7 +24,6 @@ CPU = -mstm8
 
 C_DEFS = \
 -DUSE_STDPERIPH_DRIVER \
--D_assert_failed
 
 # C includes
 C_INCLUDES = \
@@ -38,27 +37,47 @@ CFLAGS = $(CPU) $(C_DEFS) $(C_INCLUDES)
 $(BUILD_DIR)/%.rel: %.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
-build/stm8s_gpio.rel: source/FWLIB/src/stm8s_gpio.c
-	sdcc -mstm8 $(C_DEFS) -Isource/FWLIB/inc -Isource/USER -c source/FWLIB/src/stm8s_gpio.c -o build/stm8s_gpio.rel
+#######################################
+# 开始编译
+#######################################
+STDPERIPH_OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(STDPERIPH_C_SOURCES:.c=.o)))
+DEVICE_OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(DEVICE_C_SOURCES:.c=.o)))
+DRIVER_OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(DRIVER_C_SOURCES:.c=.o)))
+USER_OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(USER_C_SOURCES:.c=.o)))
 
-build/stm8s_clk.rel: source/FWLIB/src/stm8s_clk.c
-	sdcc -mstm8 $(C_DEFS) -Isource/FWLIB/inc -Isource/USER -c source/FWLIB/src/stm8s_clk.c -o build/stm8s_clk.rel 
+OBJECTS = $(STDPERIPH_OBJECTS) $(DEVICE_OBJECTS) $(DRIVER_OBJECTS) $(USER_OBJECTS)
 
-build/main.ihx: source/USER/main.c build/stm8s_gpio.rel
-	sdcc -mstm8 $(C_DEFS) -Isource/FWLIB/inc -Isource/USER source/USER/main.c build/stm8s_gpio.rel -o build/main.ihx 
+.PHONY: all \
+stdperiph
 
-.PHONY: burn aaa bbb ccc
+# all: stdperiph device driver user
 
+$(BUILD_DIR)/%.o: %.c
+	$(CC) -c $(CFLAGS) $< -o $@
 
-gpio: build/stm8s_gpio.rel
+vpath %.c $(sort $(dir $(STDPERIPH_C_SOURCES)))
 
-clk: build/stm8s_clk.rel
+stdperiph: $(STDPERIPH_OBJECTS)
+	@echo \<\<\<\<\<Standard Peripheral Library Compile Completely\>\>\>\>\>
 
-main: build/main.ihx
+# build/stm8s_gpio.rel: source/FWLIB/src/stm8s_gpio.c
+# 	sdcc -mstm8 $(C_DEFS) -Isource/FWLIB/inc -Isource/USER -c source/FWLIB/src/stm8s_gpio.c -o build/stm8s_gpio.rel
+
+# build/stm8s_clk.rel: source/FWLIB/src/stm8s_clk.c
+# 	sdcc -mstm8 $(C_DEFS) -Isource/FWLIB/inc -Isource/USER -c source/FWLIB/src/stm8s_clk.c -o build/stm8s_clk.rel 
+
+# build/main.ihx: source/USER/main.c build/stm8s_gpio.rel
+# 	sdcc -mstm8 $(C_DEFS) -Isource/FWLIB/inc -Isource/USER source/USER/main.c build/stm8s_gpio.rel -o build/main.ihx 
+
+# gpio: build/stm8s_gpio.rel
+
+# clk: build/stm8s_clk.rel
+
+# main: build/main.ihx
 
 
 burn:
-	stm8flash -c stlinkv2 -d /dev/ttyUSB0 -p stm8s103f3 -w $(NAME).ihx
+	stm8flash -c stlinkv2 -d /dev/ttyUSB0 -p stm8s103f3 -w build/main.ihx
 
 
 
