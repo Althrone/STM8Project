@@ -35,6 +35,13 @@ C_INCLUDES = \
 CFLAGS = $(CPU) $(C_DEFS) $(C_INCLUDES)
 
 #######################################
+#OpenOCD
+#######################################
+OCD_LINK_FILE = stlink-v2.cfg#烧录器配置文件，用于普通买到的烧录器
+# OCD_LINK_FILE = stlink-v2-1.cfg	#烧录器配置文件，用于stm32f4discovery
+OCD_CHIP_FILE = stm8s.cfg	#芯片配置文件
+
+#######################################
 # 开始编译
 #######################################
 STDPERIPH_OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(STDPERIPH_C_SOURCES:.c=.rel)))
@@ -46,11 +53,12 @@ OBJECTS = $(USER_OBJECTS) $(STDPERIPH_OBJECTS) $(DEVICE_OBJECTS) $(DRIVER_OBJECT
 
 .PHONY: all \
 stdperiph device driver user \
-$(BUILD_DIR)/main.ihx
+$(BUILD_DIR)/main.ihx \
+burn link\
 
 all: stdperiph device driver user $(BUILD_DIR)/main.ihx
 
-$(BUILD_DIR)/main.ihx: $(OBJECTS)
+$(BUILD_DIR)/main.ihx: build/main.rel build/stm8s_spi.rel build/74hc595.rel build/stm8s_gpio.rel build/stm8s_clk.rel
 	$(CC) $(CFLAGS) $^ -o $@
 
 
@@ -81,11 +89,10 @@ user: $(USER_OBJECTS)
 	@echo \<\<\<\<\<User File Compile Completely\>\>\>\>\>
 
 
-
-
-
 burn:
 	stm8flash -c stlinkv2 -d /dev/ttyUSB0 -p stm8s103f3 -w build/main.ihx
 
-
-
+link:
+	openocd \
+-f interface/$(OCD_LINK_FILE) \
+-f target/$(OCD_CHIP_FILE)

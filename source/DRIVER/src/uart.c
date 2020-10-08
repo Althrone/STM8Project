@@ -1,9 +1,9 @@
-#include "uart.h"
+// #include "uart.h"
 
-/**
- * @brief   初始化UART1
- **/
-void UART12_Init(void)
-{
+// /**
+//  * @brief   初始化UART1
+//  **/
+// void UART_Init(void)
+// {
 
-}
+// }
