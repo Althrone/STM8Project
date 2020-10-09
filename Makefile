@@ -58,8 +58,8 @@ burn link\
 
 all: stdperiph device driver user $(BUILD_DIR)/main.ihx
 
-$(BUILD_DIR)/main.ihx: build/main.rel build/stm8s_spi.rel build/74hc595.rel build/stm8s_gpio.rel build/stm8s_clk.rel
-	$(CC) $(CFLAGS) $^ -o $@
+$(BUILD_DIR)/main.ihx: build/main.rel build/stm8s_spi.rel build/74hc595.rel build/stm8s_gpio.rel build/stm8s_clk.rel build/display.rel
+	$(CC) $(CFLAGS) $^ --out-fmt-ihx -o $@
 
 
 # build/main.ihx: source/USER/main.c build/stm8s_gpio.rel

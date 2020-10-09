@@ -1,42 +1,51 @@
 #include "main.h"
 
-void delay(void)
-{
-    for (uint8_t i = 0; i < 100; i++)
-        {
-            for (uint8_t j = 0; j < 100; j++)
-            {
-                // for (uint8_t k = 0; k < 100; k++);
-            }
-        };
-}
+// void delay(void)
+// {
+//     for (uint8_t i = 0; i < 100; i++)
+//         {
+//             for (uint8_t j = 0; j < 100; j++)
+//             {
+//                 // for (uint8_t k = 0; k < 100; k++);
+//             }
+//         };
+// }
 
 void main()
 {
+    CLK_DeInit();
     HC595_Init();
     rim();
+    // uint8_t a=0x00;
     while(1)
-    {
-        GPIO_WriteLow(GPIOC,GPIO_PIN_7);
-        SPI_SendData(0xac);
-        delay();
-        while(SPI_GetFlagStatus(SPI_FLAG_TXE)==RESET);
-        // SPI_SendData(0xAA);
+    {        
+        // GPIO_WriteLow(GPIOC,GPIO_PIN_7);
+        // SPI_SendData(0b10000001);
         // delay();
         // while(SPI_GetFlagStatus(SPI_FLAG_TXE)==RESET);
-        // SPI_SendData(0xFF);
+        // SPI_SendData(0);
         // delay();
         // while(SPI_GetFlagStatus(SPI_FLAG_TXE)==RESET);
-        // SPI_SendData(0xAA);
+        // SPI_SendData(0);
         // delay();
         // while(SPI_GetFlagStatus(SPI_FLAG_TXE)==RESET);
-        // SPI_SendData(0xFF);
+        // SPI_SendData(0);
         // delay();
         // while(SPI_GetFlagStatus(SPI_FLAG_TXE)==RESET);
-        // SPI_SendData(0xAA);
+        // SPI_SendData(0);
         // delay();
-        while(SPI_GetFlagStatus(SPI_FLAG_TXE)==RESET);
-        GPIO_WriteLow(GPIOC,GPIO_PIN_7);
+        // while(SPI_GetFlagStatus(SPI_FLAG_TXE)==RESET);
+        // SPI_SendData(0);
+        // delay();
+        // while(SPI_GetFlagStatus(SPI_FLAG_TXE)==RESET);
+        // delay();
+        // GPIO_WriteHigh(GPIOC,GPIO_PIN_7);
+        // a++;
+        // if(a>0xff)
+        // a=0x00;
+        // delay();delay();delay();delay();delay();delay();delay();delay();delay();
+
+        DISP_ShowNumber();
     }
 }
 

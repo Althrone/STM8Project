@@ -20,3 +20,4 @@ void HC595_Init(void)
              0x07);
     SPI_Cmd(ENABLE);
 }
+
