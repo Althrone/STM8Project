@@ -1,3 +1,6 @@
+# sdcc -c -mstm8 -DUSE_STDPERIPH_DRIVER  -Isource/USER -Isource/FWLIB/inc -Isource/DRIVER/inc -Isource/DEVICE/inc -Isource/FUNCTION/inc  source/FUNCTION/src/display.c -o build/display.rel
+
+
 # Project name
 NAME = RcF_NixieClock_Prototype
 
