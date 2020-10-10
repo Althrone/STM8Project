@@ -43,7 +43,7 @@ debug软件还没找到，openocd不支持stm8，这个后面再说吧。
 |2020/9/29|十 一 献 礼，sb寄存器开发我扔了，现在已经支持标准库开发，我迟点把makefile写好一点，现在这个太拉跨。|
 |2020/10/9|国庆结束后的第一天，终于有突破性成果|
 
-![1.png][1.png]
+![bling.jpg](https://github.com/Althrone/STM8Project/tree/master/imgs/bling.jpg)
 
 ## DEMO
 |名称|描述|
