@@ -5,6 +5,7 @@
 #include "stm8s.h"
 
 #include "74hc595.h"
+#include "display.h"
 
 /* Exported types ------------------------------------------------------------*/
 

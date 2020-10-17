@@ -4,13 +4,17 @@
         {
             "type": "stm8-debug",
             "request": "launch",
+            "serverType": "stm8-sdcc",
             "name": "Launch Program",
-            "executable": ".\\out\\IAR_STM8\\stm8_demo.out",
-            "cpu": "STM8S103F3P",
+            "executable": "${workspaceFolder}/build/main.elf",
+            "cpu": "STM8S003F3",
             "openOcdConfigs": [
                 "interface/stlink.cfg",
                 "target/stm8s.cfg"
             ]
+            // "customCommands": [
+            //     {""}
+            // ]
         }
     ]
 }

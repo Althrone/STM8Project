@@ -14,11 +14,14 @@
 void main()
 {
     CLK_DeInit();
+    BEEP_Init(BEEP_FREQUENCY_1KHZ);
+    BEEP_Cmd(ENABLE);
     HC595_Init();
     rim();
     // uint8_t a=0x00;
     while(1)
-    {        
+    {
+
         // GPIO_WriteLow(GPIOC,GPIO_PIN_7);
         // SPI_SendData(0b10000001);
         // delay();
